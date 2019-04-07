@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-6" *ngFor="let t of tempItems">
+
+    <mat-card class="example-card" >
+
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"
+             matTooltip="{{t.user.firstname}} {{t.user.lastname}}"
+             matTooltipPosition="above">
+          <img mat-card-avatar [src]="t.user.profileImage" alt="profile image">
+        </div>
+        <mat-card-title>{{t.name}}</mat-card-title>
+        <mat-card-subtitle>{{t.location}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-divider></mat-divider><br>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <img mat-card-image [src]="t.image"
+                 alt="image" style="margin-top: 5px;">
+          </div>
+
+          <div class="col-6">
+            <p><small>Starting Price:</small></p>
+            <h4 style="margin-top: -15px;">{{t.startingPrice}} DKK</h4>
+
+            <div *ngIf="(t.bids).length!=0" class="lastBid">
+              <p><small>Last Bid:</small></p>
+              <h4 style="margin-top: -15px;">{{t.bids[t.bids.length - 1].amount}} DKK</h4>
+            </div>
+
+            <p><b>Start:</b> {{t.dateCreated | date}}</p>
+            <p style="margin-top: -15px;"><b>End:</b> {{t.endDate | date}}</p>
+
+            <button mat-button color="accent" routerLink="/product-details/{{t.id}}" style="margin-left: -15px;">More Info...</button>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!--add auction&#45;&#45;start-->
+
+<div class="container">
+  <div class="row" *ngIf="(items | async)?.length!=0">
+<div class="col-sm-12 col-md-6" *ngFor="let t of items | async">
+    <mat-card class="example-card">
+
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"
+             matTooltip="{{t.user.firstname}} {{t.user.lastname}}"
+             matTooltipPosition="above">
+          <img mat-card-avatar [src]="t.user.profileImage" alt="profile image">
+        </div>
+        <mat-card-title>{{t.name}}</mat-card-title>
+        <mat-card-subtitle>{{t.location}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-divider></mat-divider><br>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <img mat-card-image [src]="t.image"
+                 alt="image" style="margin-top: 5px;">
+          </div>
+
+          <div class="col-6">
+            <p><small>Starting Price:</small></p>
+            <h4 style="margin-top: -15px;">{{t.startingPrice}} DKK</h4>
+
+            <div *ngIf="(t.bids).length!=0" class="lastBid">
+            <p><small>Last Bid:</small></p>
+            <h4 style="margin-top: -15px;">{{t.bids[t.bids.length - 1].amount}} DKK</h4>
+            </div>
+
+            <p><b>Start:</b> {{t.dateCreated | date}}</p>
+            <p style="margin-top: -15px;"><b>End:</b> {{t.endDate | date}}</p>
+
+            <button mat-button color="accent" routerLink="/product-details/{{t.id}}" style="margin-left: -15px;">More Info...</button>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+</div>
+
+
+
+
+
+
+
+  </div>
+</div>
+
+<!--add auction&#45;&#45;finish-->
+
+
+
+
+

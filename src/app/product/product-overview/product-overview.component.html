@@ -1,0 +1,8 @@
+<mat-card class="example-card">
+<p>
+<span matBadge="{{ (items | async).length }}" matBadgeOverlap="false" matBadgeColor="accent">
+  Last Update: {{ (lastUpdate | async) | date:'mediumTime' }} | Total items</span>
+</p>
+</mat-card><br>
+
+<!--<button mat-raised-button color="warn" (click)="clearItems()">Delete All</button>-->

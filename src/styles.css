@@ -1,1 +1,57 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/prebuilt-themes/purple-green.css';
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet"';
+
+html, body { height: 100%; }
+body { font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+img {width: 100%;}
+
+.example-card {margin: 15px;}
+
+.avatar {
+  background-size: cover;
+  border-radius: 50%;
+  width: 75px;
+}
+
+.example-header-image {
+  background-size: cover;
+}
+
+i, .mat-card-avatar {
+  cursor: pointer;
+}
+
+th {padding-right: 5px;}
+
+
+
+footer {
+  position: fixed;
+  left:0;
+  bottom:0;
+  width:100%;
+  text-align: center;
+}
+
+.logo {
+  padding-right: 20px;
+  cursor: pointer;
+}
+
+.lastBid {
+  color: #68efad;
+}

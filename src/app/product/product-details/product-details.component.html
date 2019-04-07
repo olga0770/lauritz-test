@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+
+      <mat-card class="example-card" >
+
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"
+               matTooltip="{{tempItemSingle.user.firstname}} {{tempItemSingle.user.lastname}}"
+               matTooltipPosition="above">
+            <img mat-card-avatar [src]="tempItemSingle.user.profileImage" alt="profile image">
+          </div>
+
+          <mat-card-title>{{tempItemSingle.name}}</mat-card-title>
+          <mat-card-subtitle>{{tempItemSingle.location}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-divider></mat-divider><br>
+
+
+        <div class="container">
+          <div class="row">
+            <div class="col-3">
+              <img mat-card-image [src]="tempItemSingle.image"
+                   alt="image" style="margin-top: 5px;">
+            </div>
+
+            <div class="col-9">
+              <p>{{tempItemSingle.description}}</p>
+              <p><small>Starting Price:</small></p>
+              <h4 style="margin-top: -15px;">{{tempItemSingle.startingPrice}} DKK</h4>
+
+              <div *ngIf="(tempItemSingle.bids).length!=0" class="lastBid">
+                <p><small>Last Bid:</small></p>
+                <h4 style="margin-top: -15px;">{{tempItemSingle.bids[tempItemSingle.bids.length - 1].amount}} DKK</h4>
+              </div>
+
+              <p><b>Start:</b> {{tempItemSingle.dateCreated | date}}</p>
+              <p style="margin-top: -15px;"><b>End:</b> {{tempItemSingle.endDate | date}}</p>
+
+
+
+              <form class="example-form" (ngSubmit)="onSubmit()" [formGroup]="addBidForm">
+                <mat-form-field class="example-full-width">
+                  <input matInput type="number"
+                         placeholder="Add your bid"
+                         formControlName="amount">
+                </mat-form-field>
+                <button type="submit" mat-raised-button color="primary">Add Bid</button>
+              </form>
+
+
+
+            </div>
+          </div>
+        </div>
+
+      </mat-card>
+
+    </div>
+  </div>
+</div>
+
+
+
+

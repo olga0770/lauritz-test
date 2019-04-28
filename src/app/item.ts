@@ -1,5 +1,5 @@
 export interface IProduct {
-  id: string;
+  _id: string;
   name: string;
   image: string;
   description: string;
@@ -13,7 +13,7 @@ export interface IProduct {
 
 
 export interface IUser {
-  id: string;
+  _id: string;
   username: string;
   profileImage: string;
   firstname: string;
@@ -22,7 +22,7 @@ export interface IUser {
 
 
 export interface IBid {
-  id: string;
+  _id: string;
   userId: string;
   amount: number;
   date: Date;

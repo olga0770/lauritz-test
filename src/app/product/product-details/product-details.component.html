@@ -2,17 +2,17 @@
   <div class="row">
     <div class="col-12">
 
-      <mat-card class="example-card" >
+      <mat-card class="example-card">
 
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"
-               matTooltip="{{tempItemSingle.user.firstname}} {{tempItemSingle.user.lastname}}"
+               matTooltip="{{t.user.firstname}} {{t.user.lastname}}"
                matTooltipPosition="above">
-            <img mat-card-avatar [src]="tempItemSingle.user.profileImage" alt="profile image">
+            <img mat-card-avatar [src]="t.user.profileImage" alt="profile image">
           </div>
 
-          <mat-card-title>{{tempItemSingle.name}}</mat-card-title>
-          <mat-card-subtitle>{{tempItemSingle.location}}</mat-card-subtitle>
+          <mat-card-title>{{t.name}}</mat-card-title>
+          <mat-card-subtitle>{{t.location}}</mat-card-subtitle>
         </mat-card-header>
         <mat-divider></mat-divider><br>
 
@@ -20,22 +20,22 @@
         <div class="container">
           <div class="row">
             <div class="col-3">
-              <img mat-card-image [src]="tempItemSingle.image"
+              <img mat-card-image [src]="t.image"
                    alt="image" style="margin-top: 5px;">
             </div>
 
             <div class="col-9">
-              <p>{{tempItemSingle.description}}</p>
+              <p>{{t.description}}</p>
               <p><small>Starting Price:</small></p>
-              <h4 style="margin-top: -15px;">{{tempItemSingle.startingPrice}} DKK</h4>
+              <h4 style="margin-top: -15px;">{{t.startingPrice}} DKK</h4>
 
-              <div *ngIf="(tempItemSingle.bids).length!=0" class="lastBid">
+              <div *ngIf="(t.bids).length!=0 && t.bids[t.bids.length - 1].amount !=0" class="lastBid">
                 <p><small>Last Bid:</small></p>
-                <h4 style="margin-top: -15px;">{{tempItemSingle.bids[tempItemSingle.bids.length - 1].amount}} DKK</h4>
+                <h4 style="margin-top: -15px;">{{t.bids[t.bids.length - 1].amount}} DKK</h4>
               </div>
 
-              <p><b>Start:</b> {{tempItemSingle.dateCreated | date}}</p>
-              <p style="margin-top: -15px;"><b>End:</b> {{tempItemSingle.endDate | date}}</p>
+              <p><b>Start:</b> {{t.dateCreated | date}}</p>
+              <p style="margin-top: -15px;"><b>End:</b> {{t.endDate | date}}</p>
 
 
 
@@ -43,9 +43,13 @@
                 <mat-form-field class="example-full-width">
                   <input matInput type="number"
                          placeholder="Add your bid"
-                         formControlName="amount">
+                         formControlName="amount" required>
+                  <mat-error *ngIf="addBidForm.controls.amount.errors?.required && addBidForm.controls.amount.touched">
+                    The Bid field is required!</mat-error>
+                  <mat-error *ngIf="t.bids['amount'] > t.startingPrice">
+                  The Bid must be greater than tne Current Price!</mat-error>
                 </mat-form-field>
-                <button type="submit" mat-raised-button color="primary">Add Bid</button>
+                <button type="submit" mat-raised-button color="primary" [disabled]="!addBidForm.valid">Add Bid</button>
               </form>
 
 

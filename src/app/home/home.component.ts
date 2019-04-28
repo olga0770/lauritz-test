@@ -3,6 +3,8 @@ import {IProduct} from '../item';
 import { TempDataService } from '../services/temp-data.service';
 import {NgRedux, select} from '@angular-redux/store';
 import {IAppState} from '../store';
+import { Actions } from '../actions';
+
 
 @Component({
   selector: 'app-home',
@@ -10,12 +12,16 @@ import {IAppState} from '../store';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  tempItems: IProduct[];
-  @select() items;
+  @select() products;
 
-  constructor(private temp: TempDataService, private ngRedux: NgRedux<IAppState>) { }
+  // products: IProduct[];
+  // @select() items;
+
+  constructor(private temp: TempDataService, private ngRedux: NgRedux<IAppState>, private actions: Actions) { }
 
   ngOnInit() {
-    this.tempItems = this.temp.getProducts();
+    // this.products = this.temp.getProducts();
+
+    }
   }
-}
+

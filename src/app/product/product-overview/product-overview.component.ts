@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
 import { IAppState} from '../../store';
-import { REMOVE_ALL_ITEMS } from '../../actions';
+import { Actions } from '../../actions';
 
 @Component({
   selector: 'app-product-overview',
@@ -9,7 +9,7 @@ import { REMOVE_ALL_ITEMS } from '../../actions';
   styleUrls: ['./product-overview.component.css']
 })
 export class ProductOverviewComponent implements OnInit {
-  @select() items;
+  @select() products;
   @select() lastUpdate;
 
   constructor(private ngRedux: NgRedux<IAppState>) { }
@@ -18,7 +18,7 @@ export class ProductOverviewComponent implements OnInit {
   }
 
   clearItems() {
-    this.ngRedux.dispatch({type: REMOVE_ALL_ITEMS});
+    // this.ngRedux.dispatch({type: REMOVE_ALL_ITEMS});
   }
 
 }

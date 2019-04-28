@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {IBid, IProduct} from '../../item';
+import {IBid, IProduct } from '../../item';
 import { TempDataService } from '../../services/temp-data.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
-
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { NgRedux, select } from '@angular-redux/store';
+import { IAppState } from '../../store';
+import {Actions} from '../../actions';
 
 @Component({
   selector: 'app-product-details',
@@ -11,19 +13,20 @@ import {FormBuilder, FormGroup} from '@angular/forms';
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-  tempItemSingle: IProduct;
+  @select() products;
+  t: IProduct;
   tempBid: IBid;
   addBidForm: FormGroup;
 
-
-  constructor( private route: ActivatedRoute, private temp: TempDataService, private fb: FormBuilder ) { }
+  constructor( private route: ActivatedRoute, private temp: TempDataService,
+               private fb: FormBuilder, private ngRedux: NgRedux<IAppState>, private actions: Actions ) { }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.tempItemSingle = this.temp.findProduct(id);
+    this.t = this.temp.findProduct(id);
 
     this.addBidForm = this.fb.group({
-      amount: [''],
+      amount: ['', [Validators.required]]
     });
   }
 

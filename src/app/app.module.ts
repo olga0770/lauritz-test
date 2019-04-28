@@ -17,6 +17,7 @@ import { AddProductComponent } from './product/add-product/add-product.component
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProductDetailsComponent } from './product/product-details/product-details.component';
 import { HomeComponent } from './home/home.component';
+import { EditProductComponent } from './product/edit-product/edit-product.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { HomeComponent } from './home/home.component';
     AddProductComponent,
     PageNotFoundComponent,
     ProductDetailsComponent,
-    HomeComponent
+    HomeComponent,
+    EditProductComponent
 
   ],
   imports: [

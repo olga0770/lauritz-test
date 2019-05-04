@@ -44,10 +44,10 @@
                   <input matInput type="number"
                          placeholder="Add your bid"
                          formControlName="amount" required>
-                  <mat-error *ngIf="addBidForm.controls.amount.errors?.required && addBidForm.controls.amount.touched">
+                  <mat-error *ngIf="addBidForm.controls.amount.errors?.required && addBidForm.controls.amount.touched && addBidForm.controls.amount.dirty">
                     The Bid field is required!</mat-error>
-                  <mat-error *ngIf="t.bids['amount'] > t.startingPrice">
-                  The Bid must be greater than tne Current Price!</mat-error>
+                  <mat-error *ngIf="addBidForm.controls.amount.errors?.min">
+                  Your Bid must be greater than tne Last Bid!</mat-error>
                 </mat-form-field>
                 <button type="submit" mat-raised-button color="primary" [disabled]="!addBidForm.valid">Add Bid</button>
               </form>

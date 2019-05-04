@@ -4,8 +4,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
 
-import { NgRedux, NgReduxModule } from '@angular-redux/store';
-import { IAppState, rootReducer, INITIAL_STATE } from './store';
+import {DevToolsExtension, NgRedux, NgReduxModule} from '@angular-redux/store';
+import { IAppState, rootReducer } from './store';
+import { NgReduxRouter, NgReduxRouterModule } from '@angular-redux/router';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -18,6 +19,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ProductDetailsComponent } from './product/product-details/product-details.component';
 import { HomeComponent } from './home/home.component';
 import { EditProductComponent } from './product/edit-product/edit-product.component';
+import { RegisterComponent } from './user/register/register.component';
+import { LoginComponent } from './user/login/login.component';
 
 
 @NgModule({
@@ -29,11 +32,14 @@ import { EditProductComponent } from './product/edit-product/edit-product.compon
     PageNotFoundComponent,
     ProductDetailsComponent,
     HomeComponent,
-    EditProductComponent
+    EditProductComponent,
+    RegisterComponent,
+    LoginComponent
 
   ],
   imports: [
     NgReduxModule,
+    NgReduxRouterModule.forRoot(),
     BrowserAnimationsModule,
     MaterialModule,
     AppRoutingModule,
@@ -46,7 +52,11 @@ import { EditProductComponent } from './product/edit-product/edit-product.compon
 })
 export class AppModule {
   constructor(
-    ngRedux: NgRedux<IAppState>) {
-    ngRedux.configureStore(rootReducer, INITIAL_STATE);
+    private ngRedux: NgRedux<IAppState>,
+    private devTool: DevToolsExtension,
+    private ngReduxRouter: NgReduxRouter) {
+    this.ngRedux.configureStore(rootReducer, {}, [], [ devTool.isEnabled() ? devTool.enhancer() : f => f]);
+
+    ngReduxRouter.initialize();
   }
 }

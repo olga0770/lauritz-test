@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
-import { IAppState } from '../../store';
-import { Actions } from '../../actions';
+import {IAppState, ProductState} from '../../store';
 import { IProduct } from '../../item';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, ParamMap} from '@angular/router';
+import {ProductsActions} from '../../redux/products.actions';
+import {TempDataService} from '../../services/temp-data.service';
+import {productsReducer} from '../../redux/products.reducer';
+import * as types from '../../redux/products.actions';
 
 @Component({
   selector: 'app-edit-product',
@@ -12,10 +15,14 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./edit-product.component.css']
 })
 export class EditProductComponent implements OnInit {
-  @select() products;
+  // @select() products;
+  products: IProduct[];
+  t: IProduct;
+  // product: IProduct = this.products[0];
   editProductForm: FormGroup;
 
-  constructor(private ngRedux: NgRedux<IAppState>, private fb: FormBuilder, private actions: Actions, private route: ActivatedRoute) { }
+  constructor(private ngRedux: NgRedux<IAppState>, private fb: FormBuilder, private productsActions: ProductsActions,
+              private route: ActivatedRoute, private temp: TempDataService) { }
 
   ngOnInit() {
     this.editProductForm = this.fb.group(
@@ -28,24 +35,39 @@ export class EditProductComponent implements OnInit {
         location: [''],
         endDate: new Date(),
         dateCreated: new Date(),
-        user: {id: '3', username: 'monkey',
+        user: {_id: '3', username: 'monkey',
           profileImage: 'https://archive.icann.org/en/biog/photos/chalaby-profile.jpg',
-          firstname: 'Dan', lastname: 'Christensen'},
+          firstname: 'Dan', lastname: 'Christensen',
+          email: 'christensen@gmail.com',
+          phone: '23125678',
+          birthDate: new Date(1971, 1, 2)},
         startingPrice: [''],
         bids: []
-      }
-    );
+      });
+
+    const id = this.route.snapshot.paramMap.get('id');
+    this.t = this.temp.findProduct(id);
   }
 
   onSubmit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    const editProduct = this.editProductForm.value as IProduct;
-    this.actions.actionEditProduct(editProduct, id);
-    console.log('edit');
+    const product = this.editProductForm.value as IProduct;
+    this.productsActions.actionUpdateProduct(product);
+    console.log('update');
+
+    this.ngRedux.select(state => state.products).subscribe(res => {
+      this.products = res.products;
+    });
+
+
+
+
+
+
+
   }
 
   deleteProduct(product) {
-    this.actions.actionDeleteProduct(product);
+    this.productsActions.actionDeleteProduct(product);
   }
 
 }

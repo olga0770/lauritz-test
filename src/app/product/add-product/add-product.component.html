@@ -1,74 +1,54 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-12 col-md-6">
+    <div class="col-sm-12 col-md-12">
 
-<mat-card class="example-card">
-  <mat-card-title>Add Auction</mat-card-title>
-  <mat-divider></mat-divider><br>
+      <mat-card class="example-card">
+        <mat-card-title>Add Auction</mat-card-title>
+        <mat-divider></mat-divider>
+        <br>
 
         <form class="example-form" (ngSubmit)="onSubmit()" [formGroup]="addProductForm">
 
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Auction Title" formControlName="name" required>
-          <mat-error *ngIf="addProductForm.controls.name.errors?.required && addProductForm.controls.name.touched">
-            The Auction field is required!</mat-error>
-          <mat-error *ngIf="addProductForm.controls.name.errors?.minlength && addProductForm.controls.name.touched">
-            The Auction field must be at least 3 characters
-          </mat-error>
-        </mat-form-field><br>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Auction Title" formControlName="name" required>
+            <mat-error
+              *ngIf="addProductForm.controls.name.errors?.required && addProductForm.controls.name.touched && addProductForm.controls.name.dirty">
+              The Auction field is required!
+            </mat-error>
+            <mat-error
+              *ngIf="addProductForm.controls.name.errors?.minlength && addProductForm.controls.name.touched && addProductForm.controls.name.dirty">
+              The Auction field must be at least 3 characters
+            </mat-error>
+          </mat-form-field>
+          <br>
 
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Location" formControlName="location" required>
-          <mat-error *ngIf="addProductForm.controls.location.errors?.required && addProductForm.controls.location.touched">
-            The Location field is required!</mat-error>
-          <mat-error *ngIf="addProductForm.controls.location.errors?.minlength && addProductForm.controls.location.touched">
-            The Location field must be at least 3 characters
-          </mat-error>
-        </mat-form-field><br>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Location" formControlName="location" required>
+            <mat-error
+              *ngIf="addProductForm.controls.location.errors?.required && addProductForm.controls.location.touched && addProductForm.controls.location.dirty">
+              The Location field is required!
+            </mat-error>
+            <mat-error
+              *ngIf="addProductForm.controls.location.errors?.minlength && addProductForm.controls.location.touched && addProductForm.controls.location.dirty">
+              The Location field must be at least 3 characters
+            </mat-error>
+          </mat-form-field>
+          <br>
 
-        <!--<mat-form-field class="example-full-width">-->
-          <!--<textarea matInput matTextareaAutosize-->
-                    <!--placeholder="Description"-->
-                    <!--[(ngModel)]="model.description"-->
-                    <!--name="description"-->
-                    <!--#description="ngModel"></textarea>-->
-        <!--</mat-form-field><br>-->
-
-        <!--<mat-form-field class="example-full-width">-->
-          <!--<input matInput type="number"-->
-                    <!--placeholder="Starting Price"-->
-                    <!--[(ngModel)]="model.startingPrice"-->
-                    <!--name="startingPrice"-->
-                    <!--#startingPrice="ngModel">-->
-        <!--</mat-form-field><br>-->
-
-        <!--<mat-form-field class="example-full-width">-->
-        <!--<input matInput [matDatepicker]="picker"-->
-               <!--placeholder="Auction ends"-->
-               <!--[(ngModel)]="model.endDate"-->
-               <!--name="endDate"-->
-               <!--#endDate="ngModel"-->
-               <!--&gt;-->
-        <!--<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
-        <!--<mat-datepicker #picker touchUi="true"></mat-datepicker>-->
-        <!--</mat-form-field>-->
-
-        <button type="submit" mat-raised-button color="primary" [disabled]="!addProductForm.valid">Add Auction</button>
-      </form>
-    </mat-card>
+          <button type="submit" mat-raised-button color="primary" [disabled]="!addProductForm.valid">Add Auction
+          </button>
+        </form>
+      </mat-card>
 
     </div>
+  </div>
+</div>
 
 
-
-
-
-
-    <div class="col-sm-12 col-md-6">
-
-      <div *ngIf="(products | async).length!=2">
-        <div *ngFor="let t of products | async last as isLast">
-      <mat-card class="example-card" *ngIf="isLast">
+<div class="container">
+  <div class="row" *ngIf="(products)?.length!=0">
+    <div class="col-sm-12 col-md-6" *ngFor="let t of products.slice().reverse()">
+      <mat-card class="example-card">
 
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"
@@ -76,12 +56,11 @@
                matTooltipPosition="above">
             <img mat-card-avatar [src]="t.user.profileImage" alt="profile image">
           </div>
-
-          <mat-card-title>{{t.name}} {{t._id}}</mat-card-title>
+          <mat-card-title>{{t.name }}</mat-card-title>
           <mat-card-subtitle>{{t.location}}</mat-card-subtitle>
         </mat-card-header>
-        <mat-divider></mat-divider><br>
-
+        <mat-divider></mat-divider>
+        <br>
 
         <div class="container">
           <div class="row">
@@ -91,36 +70,37 @@
             </div>
 
             <div class="col-6">
-              <p>{{t.description}}</p>
-              <p><small>Starting Price:</small></p>
+              <p>
+                <small>Starting Price:</small>
+              </p>
               <h4 style="margin-top: -15px;">{{t.startingPrice}} DKK</h4>
+
               <p><b>Start:</b> {{t.dateCreated | date}}</p>
               <p style="margin-top: -15px;"><b>End:</b> {{t.endDate | date}}</p>
 
+              <button mat-button color="accent" routerLink="/product-details/{{t._id}}" style="margin-left: -15px;">More
+                Info...
+              </button>
+              <br>
               <button mat-icon-button color="warn" style="margin-left: -15px;">
-                <mat-icon (click)="deleteProduct(t)"
+                <mat-icon (click)="deleteProduct(t._id)"
                           matTooltip="delete"
-                          matTooltipPosition="above">delete</mat-icon>
+                          matTooltipPosition="above">delete
+                </mat-icon>
               </button>
 
               <button mat-icon-button color="accent" style="margin-left: -15px;">
                 <mat-icon matTooltip="edit"
                           matTooltipPosition="above"
-                          routerLink="/edit-auction/{{t._id}}">edit</mat-icon>
+                          routerLink="/edit-auction/{{t._id}}">edit
+                </mat-icon>
               </button>
 
             </div>
           </div>
         </div>
-
       </mat-card>
-        </div>
     </div>
-
-    </div>
-
-
-
   </div>
 </div>
 

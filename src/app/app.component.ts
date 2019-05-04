@@ -7,7 +7,7 @@ import { MaterialModule } from './material';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'lauritz-test';
+  title = 'Lauritz Auction';
 }
 
 

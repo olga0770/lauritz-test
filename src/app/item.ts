@@ -11,15 +11,16 @@ export interface IProduct {
   bids: IBid[];
 }
 
-
 export interface IUser {
   _id: string;
   username: string;
   profileImage: string;
   firstname: string;
   lastname: string;
+  email: string;
+  phone: string;
+  birthDate: Date;
 }
-
 
 export interface IBid {
   _id: string;
@@ -27,3 +28,5 @@ export interface IBid {
   amount: number;
   date: Date;
 }
+
+

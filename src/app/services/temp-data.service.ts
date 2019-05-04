@@ -20,10 +20,14 @@ export class TempDataService {
     dateCreated: new Date(2019, 4, 10),
     user: {_id: '1', username: 'smarty',
       profileImage: 'https://archive.icann.org/en/biog/photos/brent-big.jpg',
-      firstname: 'Jens', lastname: 'Jensen'},
+      firstname: 'Jens', lastname: 'Jensen',
+      email: 'jensen@gmail.com',
+      phone: '23453256',
+      birthDate: new Date(1969, 8, 13)},
       startingPrice: 47500,
       bids: [
-        {_id: '1', userId: '2', amount: 48000, date: new Date (2019, 4, 11)}
+        {_id: '1', userId: '2', amount: 47500, date: new Date (2019, 4, 10)},
+        {_id: '2', userId: '2', amount: 48000, date: new Date (2019, 4, 11)}
       ]
   },
 
@@ -39,10 +43,13 @@ export class TempDataService {
       dateCreated: new Date(2019, 4, 12),
       user: {_id: '2', username: 'bigboss',
         profileImage: 'https://amp.businessinsider.com/images/5899ffcf6e09a897008b5c04-750-750.jpg',
-        firstname: 'Simon', lastname: 'Simonsen'},
+        firstname: 'Simon', lastname: 'Simonsen',
+        email: 'simonsen@gmail.com',
+        phone: '56789456',
+        birthDate: new Date(1967, 12, 26)},
       startingPrice: 38000,
       bids: [
-        {_id: '', userId: '', amount: 0, date: new Date ()}
+        {_id: '1', userId: '2', amount: 38000, date: new Date (2019, 4, 12)}
       ]
     }
 ];
@@ -63,10 +70,14 @@ export class TempDataService {
       dateCreated: new Date(2019, 4, 10),
       user: {_id: '1', username: 'smarty',
         profileImage: 'https://archive.icann.org/en/biog/photos/brent-big.jpg',
-        firstname: 'Jens', lastname: 'Jensen'},
+        firstname: 'Jens', lastname: 'Jensen',
+        email: 'jensen@gmail.com',
+        phone: '23453256',
+        birthDate: new Date(1969, 8, 13),},
       startingPrice: 47500,
       bids: [
-        {_id: '1', userId: '2', amount: 48000, date: new Date (2019, 4, 11)}
+        {_id: '1', userId: '1', amount: 47500, date: new Date (2019, 4, 10)},
+        {_id: '2', userId: '2', amount: 48000, date: new Date (2019, 4, 11)}
       ]
     },
 
@@ -82,14 +93,16 @@ export class TempDataService {
       dateCreated: new Date(2019, 4, 12),
       user: {_id: '2', username: 'bigboss',
         profileImage: 'https://amp.businessinsider.com/images/5899ffcf6e09a897008b5c04-750-750.jpg',
-        firstname: 'Simon', lastname: 'Simonsen'},
+        firstname: 'Simon', lastname: 'Simonsen',
+        email: 'simonsen@gmail.com',
+        phone: '56789456',
+        birthDate: new Date(1967, 12, 26)},
       startingPrice: 38000,
       bids: [
-        {_id: '', userId: '', amount: 0, date: new Date ()}
+        {_id: '1', userId: '2', amount: 38000, date: new Date (2019, 4, 12)}
       ]
     }
   ];
-
 
 
 

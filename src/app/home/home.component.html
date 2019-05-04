@@ -1,9 +1,7 @@
 <div class="container">
-  <div class="row" *ngIf="(products | async)?.length!=0">
-<div class="col-sm-12 col-md-6" *ngFor="let t of products | async">
+  <div class="row" *ngIf="(products)?.length!=0">
+<div class="col-sm-12 col-md-6" *ngFor="let t of products">
     <mat-card class="example-card">
-
-      <!--*ngIf="t.user._id==1"-->
 
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"
@@ -26,11 +24,6 @@
           <div class="col-6">
             <p><small>Starting Price:</small></p>
             <h4 style="margin-top: -15px;">{{t.startingPrice}} DKK</h4>
-
-            <!--<div *ngIf="(t.bids).length!=0 && t.bids[t.bids.length - 1].amount !=0" class="lastBid">-->
-              <!--<p><small>Last Bid:</small></p>-->
-              <!--<h4 style="margin-top: -15px;">{{t.bids[t.bids.length - 1].amount}} DKK</h4>-->
-            <!--</div>-->
 
             <p><b>Start:</b> {{t.dateCreated | date}}</p>
             <p style="margin-top: -15px;"><b>End:</b> {{t.endDate | date}}</p>

@@ -1,9 +1,9 @@
 import {Component, NgModule, OnInit} from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
 import { IAppState } from '../../store';
-import {Actions} from '../../actions';
 import { IProduct } from '../../item';
 import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+import {ProductsActions} from '../../redux/products.actions';
 
 @Component({
   selector: 'app-add-product',
@@ -12,10 +12,11 @@ import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 })
 
 export class AddProductComponent implements OnInit {
-  @select() products;
+  // @select() products;
+  products: IProduct[];
   addProductForm: FormGroup;
 
-  constructor(private ngRedux: NgRedux<IAppState>, private fb: FormBuilder, private actions: Actions) { }
+  constructor(private ngRedux: NgRedux<IAppState>, private fb: FormBuilder, private productsActions: ProductsActions) { }
 
   ngOnInit() {
 
@@ -29,22 +30,34 @@ export class AddProductComponent implements OnInit {
         location: ['', [Validators.required, Validators.minLength(3)]],
         endDate: new Date(),
         dateCreated: new Date(),
-        user: {id: '3', username: 'monkey',
+        user: {_id: '3', username: 'monkey',
           profileImage: 'https://archive.icann.org/en/biog/photos/chalaby-profile.jpg',
-          firstname: 'Dan', lastname: 'Christensen'},
+          firstname: 'Dan', lastname: 'Christensen',
+          email: 'christensen@gmail.com',
+          phone: '23125678',
+          birthDate: new Date(1971, 1, 2)},
         startingPrice: [''],
-        bids: []
+        bids: [
+          {_id: '1', userId: '3', amount: '', date: new Date ()}
+        ]
       }
     );
+
+    this.ngRedux.select(state => state.products).subscribe(res => {
+      this.products = res.products;
+    });
+
+
+
   }
 
   onSubmit() {
     const product = this.addProductForm.value as IProduct;
-    this.actions.actionCreateProduct(product);
+    this.productsActions.actionCreateProduct(product);
   }
 
   deleteProduct(product) {
-    this.actions.actionDeleteProduct(product);
+    this.productsActions.actionDeleteProduct(product);
   }
 
 }

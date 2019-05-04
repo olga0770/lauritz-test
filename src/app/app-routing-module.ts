@@ -7,6 +7,8 @@ import { ProductOverviewComponent } from './product/product-overview/product-ove
 import {ProductDetailsComponent} from './product/product-details/product-details.component';
 import { HomeComponent } from './home/home.component';
 import {EditProductComponent} from './product/edit-product/edit-product.component';
+import {RegisterComponent} from './user/register/register.component';
+import {LoginComponent} from './user/login/login.component';
 
 
 // Defining your routes
@@ -16,6 +18,8 @@ const routes: Routes = [
   { path: 'auction', component: ProductComponent },
   { path: 'edit-auction/:id', component: EditProductComponent },
   { path: 'product-details/:id', component: ProductDetailsComponent},
+  { path: 'register', component: RegisterComponent},
+  { path: 'login', component: LoginComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 

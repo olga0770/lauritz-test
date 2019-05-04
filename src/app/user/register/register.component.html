@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="row justify-content-center align-items-center h-100">
+    <div class="col-sm-12 col-md-8 col-lg-6 mx-auto">
+
+      <mat-card class="example-card container">
+        <mat-card-title>Register</mat-card-title>
+        <mat-divider></mat-divider>
+        <br>
+
+
+        <form class="example-form" (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+
+
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Username" formControlName="username" required>
+            <mat-error
+              *ngIf="registerForm.controls.username.errors?.required && registerForm.controls.username.touched && registerForm.controls.username.dirty">
+              The Username field is required!
+            </mat-error>
+            <mat-error
+              *ngIf="registerForm.controls.username.errors?.minlength">
+              The Username field must be at least 3 characters
+            </mat-error>
+          </mat-form-field>
+          <br>
+
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="First Name" formControlName="firstname" required>
+            <mat-error
+              *ngIf="registerForm.controls.firstname.errors?.required && registerForm.controls.firstname.touched && registerForm.controls.firstname.dirty">
+              The First Name field is required!
+            </mat-error>
+            <mat-error
+              *ngIf="registerForm.controls.firstname.errors?.minlength">
+              The First Name field must be at least 3 characters
+            </mat-error>
+          </mat-form-field>
+          <br>
+
+
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Email" formControlName="email" required>
+            <mat-error
+              *ngIf="registerForm.controls.email.errors?.required && registerForm.controls.email.touched && registerForm.controls.email.dirty">
+              The Email field is required!
+            </mat-error>
+            <mat-error
+              *ngIf="registerForm.controls.email.errors?.email">
+              The Email field is not valid!
+            </mat-error>
+          </mat-form-field>
+          <br>
+
+
+          <button type="submit" mat-raised-button color="primary" [disabled]="!registerForm.valid">Register
+          </button>
+        </form>
+
+
+      </mat-card>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row" *ngIf="(users)?.length!=0">
+    <div class="col-sm-12 col-md-6" *ngFor="let t of users.slice().reverse()">
+      <mat-card class="example-card">
+
+        <div class="container">
+          <div class="row">
+            <div class="col-6">
+              <img mat-card-image [src]="t.profileImage"
+                   alt="image" style="margin-top: 5px;">
+            </div>
+
+            <div class="col-6">
+
+              <h4 style="margin-top: -15px;">{{t.username}}</h4>
+
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,3 +1,9 @@
-<app-product-overview></app-product-overview>
-<app-add-product></app-add-product>
+<div style="color: #7b1fa2;">
+  <button mat-button routerLink="./auction-overview" routerLinkActive="active">Auction Overview</button>
+  <button mat-button routerLink="./auction-create" routerLinkActive="active">Add Auction</button>
+</div>
+<router-outlet></router-outlet>
 
+<!--
+<button mat-button routerLink="./" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"></button>
+-->

@@ -21,6 +21,9 @@ import { HomeComponent } from './home/home.component';
 import { EditProductComponent } from './product/edit-product/edit-product.component';
 import { RegisterComponent } from './user/register/register.component';
 import { LoginComponent } from './user/login/login.component';
+import { UserRatingComponent } from './user/user-rating/user-rating.component';
+import { ProductInfoComponent } from './product/product-info/product-info.component';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -34,10 +37,13 @@ import { LoginComponent } from './user/login/login.component';
     HomeComponent,
     EditProductComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    UserRatingComponent,
+    ProductInfoComponent
 
   ],
   imports: [
+    HttpClientModule,
     NgReduxModule,
     NgReduxRouterModule.forRoot(),
     BrowserAnimationsModule,

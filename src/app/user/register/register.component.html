@@ -7,9 +7,7 @@
         <mat-divider></mat-divider>
         <br>
 
-
         <form class="example-form" (ngSubmit)="onSubmit()" [formGroup]="registerForm">
-
 
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Username" formControlName="username" required>
@@ -32,11 +30,23 @@
             </mat-error>
             <mat-error
               *ngIf="registerForm.controls.firstname.errors?.minlength">
-              The First Name field must be at least 3 characters
+              The First Name field must be at least 3 characters!
             </mat-error>
           </mat-form-field>
           <br>
 
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Last Name" formControlName="lastname" required>
+            <mat-error
+              *ngIf="registerForm.controls.lastname.errors?.required && registerForm.controls.lastname.touched && registerForm.controls.lastname.dirty">
+              The Last Name field is required!
+            </mat-error>
+            <mat-error
+              *ngIf="registerForm.controls.lastname.errors?.minlength">
+              The Last Name field must be at least 3 characters!
+            </mat-error>
+          </mat-form-field>
+          <br>
 
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Email" formControlName="email" required>
@@ -51,54 +61,49 @@
           </mat-form-field>
           <br>
 
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Password" formControlName="password" required>
+            <mat-error
+              *ngIf="registerForm.controls.password.errors?.required && registerForm.controls.password.touched && registerForm.controls.password.dirty">
+              The Password field is required!
+            </mat-error>
+            <mat-error
+              *ngIf="registerForm.controls.password.errors?.minlength">
+              The Password field must be at least 5s characters!
+            </mat-error>
+          </mat-form-field>
+          <br>
+
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Phone" formControlName="phone" required>
+            <mat-error
+              *ngIf="registerForm.controls.phone.errors?.required && registerForm.controls.phone.touched && registerForm.controls.phone.dirty">
+              The Phone field is required!
+            </mat-error>
+            <mat-error
+              *ngIf="registerForm.controls.phone.errors?.minlength">
+              The Phone field must be 8 characters!
+            </mat-error>
+          </mat-form-field>
+          <br>
+
+          <div>
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="Birth Date" formControlName="birthDate">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker touchUi="true"></mat-datepicker>
+            </mat-form-field>
+          </div>
 
           <button type="submit" mat-raised-button color="primary" [disabled]="!registerForm.valid">Register
           </button>
-        </form>
-
+        </form><br>
+        <mat-divider></mat-divider><br>
+        <p>Already registered?</p>
+        <button mat-button color="accent" routerLink="/login" routerLinkActive="active" style="margin-left: -15px; margin-top: -15px;">Go to login...</button>
 
       </mat-card>
 
     </div>
   </div>
 </div>
-
-
-<div class="container">
-  <div class="row" *ngIf="(users)?.length!=0">
-    <div class="col-sm-12 col-md-6" *ngFor="let t of users.slice().reverse()">
-      <mat-card class="example-card">
-
-        <div class="container">
-          <div class="row">
-            <div class="col-6">
-              <img mat-card-image [src]="t.profileImage"
-                   alt="image" style="margin-top: 5px;">
-            </div>
-
-            <div class="col-6">
-
-              <h4 style="margin-top: -15px;">{{t.username}}</h4>
-
-            </div>
-          </div>
-        </div>
-      </mat-card>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

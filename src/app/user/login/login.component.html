@@ -1,3 +1,63 @@
-<p>
-  login works!
-</p>
+<div class="container">
+  <div class="row justify-content-center align-items-center h-100">
+    <div class="col-sm-12 col-md-8 col-lg-6 mx-auto">
+
+      <mat-card class="example-card container">
+        <mat-card-title>Login</mat-card-title>
+        <mat-divider></mat-divider>
+
+        <p class="small" style="margin-top: 15px; color: #f44336;">{{message}}</p>
+
+
+
+<!--        <h2>LOGIN</h2>
+        <p>{{message}}</p>
+        <p>
+          <button (click)="login()"  *ngIf="!authService.isLoggedIn">Login</button>
+          <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
+        </p>-->
+
+
+
+        <form class="example-form" (ngSubmit)="onSubmit()" [formGroup]="loginForm" *ngIf="!authService.isLoggedIn">
+
+
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Username" formControlName="username" required>
+            <mat-error
+              *ngIf="loginForm.controls.username.errors?.required && loginForm.controls.username.touched && loginForm.controls.username.dirty">
+              The Username field is required!
+            </mat-error>
+            <mat-error
+              *ngIf="loginForm.controls.username.errors?.minlength">
+              The Username field must be at least 3 characters
+            </mat-error>
+          </mat-form-field>
+          <br>
+
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Password" formControlName="password" required>
+            <mat-error
+              *ngIf="loginForm.controls.password.errors?.required && loginForm.controls.password.touched && loginForm.controls.password.dirty">
+              The Password field is required!
+            </mat-error>
+          </mat-form-field>
+          <br>
+
+          <button type="submit" mat-raised-button color="primary" [disabled]="!loginForm.valid">Login</button><br><br>
+
+          <mat-divider></mat-divider><br>
+          <p>Need a registration?</p>
+          <button mat-button color="accent" routerLink="/register" routerLinkActive="active" style="margin-left: -15px; margin-top: -15px;">
+            Go to register...</button>
+
+        </form>
+
+        <br><button mat-raised-button color="primary" (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
+
+
+      </mat-card>
+
+    </div>
+  </div>
+</div>

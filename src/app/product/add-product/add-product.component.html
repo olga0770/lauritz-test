@@ -1,6 +1,12 @@
+<mat-card class="example-card">
+  <p>
+    <span matBadge="{{ (products).length }}" matBadgeOverlap="false" matBadgeColor="accent">Total items</span>
+  </p>
+</mat-card>
+
 <div class="container">
-  <div class="row">
-    <div class="col-sm-12 col-md-12">
+  <div class="row justify-content-center align-items-center h-100">
+    <div class="col-sm-12 col-md-8 col-lg-6 mx-auto">
 
       <mat-card class="example-card">
         <mat-card-title>Add Auction</mat-card-title>
@@ -16,8 +22,8 @@
               The Auction field is required!
             </mat-error>
             <mat-error
-              *ngIf="addProductForm.controls.name.errors?.minlength && addProductForm.controls.name.touched && addProductForm.controls.name.dirty">
-              The Auction field must be at least 3 characters
+              *ngIf="addProductForm.controls.name.errors?.minlength">
+              The Auction field must be at least 3 characters!
             </mat-error>
           </mat-form-field>
           <br>
@@ -29,15 +35,48 @@
               The Location field is required!
             </mat-error>
             <mat-error
-              *ngIf="addProductForm.controls.location.errors?.minlength && addProductForm.controls.location.touched && addProductForm.controls.location.dirty">
-              The Location field must be at least 3 characters
+              *ngIf="addProductForm.controls.location.errors?.minlength">
+              The Location field must be at least 3 characters!
             </mat-error>
           </mat-form-field>
           <br>
 
+          <mat-form-field class="example-full-width">
+            <textarea matInput matTextareaAutosize placeholder="Description" formControlName="description" required></textarea>
+            <mat-error
+              *ngIf="addProductForm.controls.description.errors?.required && addProductForm.controls.description.touched && addProductForm.controls.description.dirty">
+              The Description field is required!
+            </mat-error>
+            <mat-error
+              *ngIf="addProductForm.controls.description.errors?.minlength">
+              The Description field must be at least 10 characters!
+            </mat-error>
+          </mat-form-field>
+          <br>
+
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Starting Price" formControlName="startingPrice" required type="number">
+            <mat-error
+              *ngIf="addProductForm.controls.startingPrice.errors?.required && addProductForm.controls.startingPrice.touched && addProductForm.controls.startingPrice.dirty">
+              The Starting Price field must be a number!
+            </mat-error>
+          </mat-form-field>
+          <br>
+
+          <div>
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="Auction ends" formControlName="endDate">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker touchUi="true"></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <br>
+
           <button type="submit" mat-raised-button color="primary" [disabled]="!addProductForm.valid">Add Auction
           </button>
+
         </form>
+
       </mat-card>
 
     </div>
@@ -46,6 +85,7 @@
 
 
 <div class="container">
+  <div *ngIf="isLoading" style="text-align: center;">Please wait... We are loading products.</div>
   <div class="row" *ngIf="(products)?.length!=0">
     <div class="col-sm-12 col-md-6" *ngFor="let t of products.slice().reverse()">
       <mat-card class="example-card">
@@ -54,7 +94,7 @@
           <div mat-card-avatar class="example-header-image"
                matTooltip="{{t.user.firstname}} {{t.user.lastname}}"
                matTooltipPosition="above">
-            <img mat-card-avatar [src]="t.user.profileImage" alt="profile image">
+            <img mat-card-avatar *ngIf="t.user.profileImage" [src]="t.user.profileImage" alt="profile image">
           </div>
           <mat-card-title>{{t.name }}</mat-card-title>
           <mat-card-subtitle>{{t.location}}</mat-card-subtitle>
@@ -65,20 +105,18 @@
         <div class="container">
           <div class="row">
             <div class="col-6">
-              <img mat-card-image [src]="t.image"
+              <img mat-card-image *ngIf="t.image" [src]="t.image"
                    alt="image" style="margin-top: 5px;">
             </div>
 
             <div class="col-6">
-              <p>
-                <small>Starting Price:</small>
-              </p>
+              <p><small>Starting Price:</small></p>
               <h4 style="margin-top: -15px;">{{t.startingPrice}} DKK</h4>
 
               <p><b>Start:</b> {{t.dateCreated | date}}</p>
               <p style="margin-top: -15px;"><b>End:</b> {{t.endDate | date}}</p>
 
-              <button mat-button color="accent" routerLink="/product-details/{{t._id}}" style="margin-left: -15px;">More
+              <button mat-button color="accent" routerLink="/product/product-details/{{t._id}}" style="margin-left: -15px;">More
                 Info...
               </button>
               <br>
@@ -92,7 +130,7 @@
               <button mat-icon-button color="accent" style="margin-left: -15px;">
                 <mat-icon matTooltip="edit"
                           matTooltipPosition="above"
-                          routerLink="/edit-auction/{{t._id}}">edit
+                          routerLink="/product/edit-auction/{{t._id}}">edit
                 </mat-icon>
               </button>
 

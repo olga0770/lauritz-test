@@ -1,11 +1,9 @@
 import {TempDataService} from '../services/temp-data.service';
 import {UsersActions} from './users.actions';
 import {tassign} from 'tassign';
-import {IProduct} from '../item';
-import {IUser} from '../item';
-import {IAppState, UserState} from '../store';
+import {UserState} from '../store';
 
-export const INITIAL_STATE: UserState = {users: []};
+export const INITIAL_STATE: UserState = {users: TempDataService.users};
 
 export function usersReducer(state: UserState = INITIAL_STATE, action: any) {
   switch (action.type) {
@@ -16,10 +14,10 @@ export function usersReducer(state: UserState = INITIAL_STATE, action: any) {
         users: state.users.concat(tassign(action.payload))
       });
 
-    /*case UsersActions.DELETE_USER:
+    case UsersActions.DELETE_USER:
       return tassign(state, {
         users: state.users.filter(u => u._id !== action.payload)
-      });*/
+      });
 
       default:
       return state;

@@ -7,6 +7,7 @@ import {TempDataService} from './services/temp-data.service';
 
 export class ProductState {
   products: IProduct[];
+  isLoading: boolean;
   // lastUpdate: null;
 }
 

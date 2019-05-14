@@ -1,0 +1,32 @@
+<mat-card class="example-card">
+
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"
+         matTooltip="{{product.user.firstname}} {{product.user.lastname}}"
+         matTooltipPosition="above">
+      <img mat-card-avatar *ngIf="product.user.profileImage" [src]="product.user.profileImage" alt="profile image">
+    </div>
+    <mat-card-title>{{product.name }}</mat-card-title>
+    <mat-card-subtitle>{{product.location}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-divider></mat-divider><br>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <img mat-card-image *ngIf="product.image" [src]="product.image"
+             alt="image" style="margin-top: 5px;">
+      </div>
+
+      <div class="col-6">
+        <p><small>Starting Price:</small></p>
+        <h4 style="margin-top: -15px;">{{product.startingPrice}} DKK</h4>
+
+        <p><b>Start:</b> {{product.dateCreated | date}}</p>
+        <p style="margin-top: -15px;"><b>End:</b> {{product.endDate | date}}</p>
+
+        <button mat-button color="accent" routerLink="/product/product-details/{{product._id}}" style="margin-left: -15px;">More Info...</button>
+      </div>
+    </div>
+  </div>
+</mat-card>

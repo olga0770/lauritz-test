@@ -1,8 +1,23 @@
 <mat-card class="example-card">
-<p>
-<span matBadge="{{ (products).length }}" matBadgeOverlap="false" matBadgeColor="accent">Total items</span>
-</p>
+  <p>
+    <span matBadge="{{ (products).length }}" matBadgeOverlap="false" matBadgeColor="accent">Total items</span>
+  </p>
 </mat-card>
+
+<!--<div *ngFor="let p of products">
+<app-product-info [product]="p" (productOverview)="onProductClick($event)"></app-product-info>
+</div>-->
+
+
+<div class="container">
+  <div *ngIf="isLoading">Please wait...</div>
+  <div class="row" *ngIf="(products)?.length!=0">
+    <div class="col-sm-12 col-md-6" *ngFor="let p of products">
+      <app-product-info [product]="p" (productOverview)="onProductClick($event)"></app-product-info>
+
+    </div>
+  </div>
+</div>
 
 
 <!--<mat-card class="example-card">

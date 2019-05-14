@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <mat-card class="example-card">
+        <mat-card-title>Rate a Seller</mat-card-title>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row" *ngIf="(users)?.length!=0">
+    <div class="col-sm-12 col-md-6" *ngFor="let t of users">
+      <div *ngIf="t.isAdmin===false">
+
+      <mat-card class="example-card">
+
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image">
+            <img mat-card-avatar [src]="t.profileImage" alt="profile image">
+          </div>
+          <mat-card-title>{{t.firstname }} {{t.lastname}}</mat-card-title><br><br>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <p style="margin-top: 10px;"><b>Rating:</b></p>
+        <mat-divider></mat-divider>
+        <button mat-button color="accent" routerLink=" " style="margin-left: -15px;">More Info...</button>
+
+      </mat-card>
+
+      </div>
+    </div>
+  </div>
+</div>
+

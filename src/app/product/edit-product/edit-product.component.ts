@@ -15,10 +15,8 @@ import * as types from '../../redux/products.actions';
   styleUrls: ['./edit-product.component.css']
 })
 export class EditProductComponent implements OnInit {
-  // @select() products;
   products: IProduct[];
-  t: IProduct;
-  // product: IProduct = this.products[0];
+  product: IProduct;
   editProductForm: FormGroup;
 
   constructor(private ngRedux: NgRedux<IAppState>, private fb: FormBuilder, private productsActions: ProductsActions,
@@ -28,35 +26,61 @@ export class EditProductComponent implements OnInit {
     this.editProductForm = this.fb.group(
       {
         _id: [''],
-        name: [''],
+        name: ['Leather Swan Chair - Inspired By Designs of Arne Jacobsen', [Validators.required, Validators.minLength(3)]],
         image: 'https://static.illumsbolighus.dk/Admin/Public/GetImage.ashx?Image=/Files/Images/' +
           'XPI/8f98f20a-64c4-cfaf-388d-582ae2532d47.jpg&Width=1200&Crompression=90',
-        description: [''],
-        location: [''],
+        description: ['Jacobsen’s beautifully sculpted Swan Chair could just be the most recognisable chair of our times. ' +
+        'So if you’re thinking of buying one, you need to know you’re getting ' +
+        'a lot more than a style icon…', [Validators.required, Validators.minLength(10)]],
+        location: ['Copenhagen', [Validators.required, Validators.minLength(3)]],
         endDate: new Date(),
         dateCreated: new Date(),
-        user: {_id: '3', username: 'monkey',
+        user: {
+          _id: '3', username: 'monkey',
           profileImage: 'https://archive.icann.org/en/biog/photos/chalaby-profile.jpg',
           firstname: 'Dan', lastname: 'Christensen',
           email: 'christensen@gmail.com',
+          password: '123456',
           phone: '23125678',
-          birthDate: new Date(1971, 1, 2)},
-        startingPrice: [''],
-        bids: []
-      });
+          birthDate: new Date(1971, 1, 2),
+          isAdmin: false
+        },
+        startingPrice: ['34500', [Validators.required]],
+        bids: [
+          {_id: '1', userId: '3', amount: '34500', date: new Date ()}
+        ]
+      }
+      );
 
-    const id = this.route.snapshot.paramMap.get('id');
-    this.t = this.temp.findProduct(id);
-  }
+/*    this.ngRedux.select(state => state.products).subscribe(res => {
+      this.products = res.products;
+    });*/
 
-  onSubmit() {
-    const product = this.editProductForm.value as IProduct;
-    this.productsActions.actionUpdateProduct(product);
-    console.log('update');
+    // const id = this.route.snapshot.paramMap.get('id');
+    // this.productsActions.actionGetProduct(id);
+    // this.t = this.temp.findProduct(id);
 
     this.ngRedux.select(state => state.products).subscribe(res => {
       this.products = res.products;
+      console.log('update product - select by id');
+      const id = this.route.snapshot.paramMap.get('id');
+      this.product = this.products.find(p => p._id === id);
     });
+  }
+
+  onSubmit() {
+    this.product = this.editProductForm.value as IProduct;
+    this.productsActions.actionUpdateProduct(this.product);
+    console.log('update');
+
+
+
+
+    /*
+        this.ngRedux.select(state => state.products).subscribe(res => {
+          this.products = res.products;
+        });
+    */
 
 
 
@@ -66,8 +90,6 @@ export class EditProductComponent implements OnInit {
 
   }
 
-  deleteProduct(product) {
-    this.productsActions.actionDeleteProduct(product);
-  }
+
 
 }

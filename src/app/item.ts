@@ -1,5 +1,6 @@
 export interface IProduct {
   _id: string;
+  customerId?: string;
   name: string;
   image: string;
   description: string;
@@ -18,8 +19,10 @@ export interface IUser {
   firstname: string;
   lastname: string;
   email: string;
+  password: string;
   phone: string;
   birthDate: Date;
+  isAdmin: boolean;
 }
 
 export interface IBid {

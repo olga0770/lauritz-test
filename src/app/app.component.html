@@ -1,18 +1,27 @@
 <mat-toolbar color="primary">
-  <span class="logo" routerLink="/">Lauritz <mat-icon>gavel</mat-icon></span>
-  <button mat-button routerLink="/">Home</button>
-  <button mat-button routerLink="/auction">Auction</button>
+  <span class="logo" routerLink="./" routerLinkActive="active">Lauritz <mat-icon>gavel</mat-icon></span>
+  <button mat-button routerLink="./" routerLinkActive="active">Home</button>
+
+  <button mat-button routerLink="./product/auction-overview" routerLinkActive="active">Auction</button>
+
+
+<!--  <button mat-button routerLink="./product/auction-create" routerLinkActive="active">Add Auction</button>
+  <button mat-button routerLink="./product/auction-overview" routerLinkActive="active">Auction Overview</button>-->
+
+  <button mat-button routerLink="/rate-seller" routerLinkActive="active">Sellers</button>
 
   <span class="example-fill-remaining-space"></span>
 
-  <button mat-button routerLink="/login">Login</button>
-  <button mat-button routerLink="/register">Register</button>
+  <button mat-button routerLink="/login" routerLinkActive="active">Login</button>
 
+  <button mat-button routerLink="/register" routerLinkActive="active">Register</button>
 
 </mat-toolbar>
 
 
 <router-outlet></router-outlet>
+
+
 
 
 

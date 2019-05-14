@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row" *ngIf="(products)?.length!=0">
-<div class="col-sm-12 col-md-6" *ngFor="let t of products">
+<div class="col-sm-12 col-md-6" *ngFor="let t of products.slice().reverse()">
     <mat-card class="example-card">
 
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"
              matTooltip="{{t.user.firstname}} {{t.user.lastname}}"
              matTooltipPosition="above">
-          <img mat-card-avatar [src]="t.user.profileImage" alt="profile image">
+          <img mat-card-avatar *ngIf="t.user.profileImage" [src]="t.user.profileImage" alt="profile image">
         </div>
         <mat-card-title>{{t.name }}</mat-card-title>
         <mat-card-subtitle>{{t.location}}</mat-card-subtitle>
@@ -17,7 +17,7 @@
       <div class="container">
         <div class="row">
           <div class="col-6">
-            <img mat-card-image [src]="t.image"
+            <img mat-card-image *ngIf="t.image" [src]="t.image"
                  alt="image" style="margin-top: 5px;">
           </div>
 
@@ -28,7 +28,8 @@
             <p><b>Start:</b> {{t.dateCreated | date}}</p>
             <p style="margin-top: -15px;"><b>End:</b> {{t.endDate | date}}</p>
 
-            <button mat-button color="accent" routerLink="/product-details/{{t._id}}" style="margin-left: -15px;">More Info...</button>
+            <button mat-button color="accent" routerLink="/product/product-details/{{t._id}}"
+                    style="margin-left: -15px;">More Info...</button>
           </div>
         </div>
       </div>

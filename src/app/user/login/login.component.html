@@ -3,7 +3,7 @@
     <div class="col-sm-12 col-md-8 col-lg-6 mx-auto">
 
       <mat-card class="example-card container">
-        <mat-card-title>Login</mat-card-title>
+        <mat-card-title id="loginTitle">Login</mat-card-title>
         <mat-divider></mat-divider>
 
         <p class="small" style="margin-top: 15px; color: #f44336;">{{message}}</p>
@@ -44,7 +44,7 @@
           </mat-form-field>
           <br>
 
-          <button type="submit" mat-raised-button color="primary" [disabled]="!loginForm.valid">Login</button><br><br>
+          <button type="submit" mat-raised-button color="primary" [disabled]="!loginForm.valid" id="btnUserlogin">Login</button><br><br>
 
           <mat-divider></mat-divider><br>
           <p>Need a registration?</p>

@@ -25,7 +25,7 @@ export class UsersActions {
         type: UsersActions.DELETE_USER,
         payload: id});
   }
-  
+
 }
 
 

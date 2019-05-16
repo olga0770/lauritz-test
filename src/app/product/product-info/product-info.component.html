@@ -20,12 +20,26 @@
 
       <div class="col-6">
         <p><small>Starting Price:</small></p>
-        <h4 style="margin-top: -15px;">{{product.startingPrice}} DKK</h4>
+        <h4 style="margin-top: -15px;">{{product.startingPrice | currency:'DKK'}}</h4>
 
         <p><b>Start:</b> {{product.dateCreated | date}}</p>
         <p style="margin-top: -15px;"><b>End:</b> {{product.endDate | date}}</p>
 
-        <button mat-button color="accent" routerLink="/product/product-details/{{product._id}}" style="margin-left: -15px;">More Info...</button>
+        <button mat-button color="accent" routerLink="/product/product-details/{{product._id}}" style="margin-left: -15px;">More Info...</button><br>
+
+        <button mat-icon-button color="warn" style="margin-left: -15px;">
+          <mat-icon (click)="deleteProduct(product._id)"
+                    matTooltip="delete"
+                    matTooltipPosition="above">delete
+          </mat-icon>
+        </button>
+
+        <button mat-icon-button color="accent" style="margin-left: -15px;">
+          <mat-icon matTooltip="edit"
+                    matTooltipPosition="above"
+                    routerLink="/product/edit-auction/{{product._id}}">edit
+          </mat-icon>
+        </button>
       </div>
     </div>
   </div>

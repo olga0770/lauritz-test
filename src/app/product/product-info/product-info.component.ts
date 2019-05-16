@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IProduct} from '../../item';
+import {ProductsActions} from '../../redux/products.actions';
 
 @Component({
   selector: 'app-product-info',
@@ -10,7 +11,7 @@ export class ProductInfoComponent implements OnInit {
   @Input() product: IProduct;
   @Output() productOverview: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(private productsActions: ProductsActions) { }
 
   ngOnInit() {
   }
@@ -18,5 +19,8 @@ export class ProductInfoComponent implements OnInit {
   onProductClicked() {
     this.productOverview.emit(this.product);
   }
+
+  deleteProduct(product) {
+    this.productsActions.deleteProduct(product); }
 
 }

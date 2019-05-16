@@ -25,7 +25,7 @@ export class EditProductComponent implements OnInit {
   ngOnInit() {
     this.editProductForm = this.fb.group(
       {
-        _id: [''],
+        // _id: [''],
         name: ['Leather Swan Chair - Inspired By Designs of Arne Jacobsen', [Validators.required, Validators.minLength(3)]],
         image: 'https://static.illumsbolighus.dk/Admin/Public/GetImage.ashx?Image=/Files/Images/' +
           'XPI/8f98f20a-64c4-cfaf-388d-582ae2532d47.jpg&Width=1200&Crompression=90',
@@ -70,7 +70,7 @@ export class EditProductComponent implements OnInit {
 
   onSubmit() {
     this.product = this.editProductForm.value as IProduct;
-    this.productsActions.actionUpdateProduct(this.product);
+    this.productsActions.updateProduct(this.product);
     console.log('update');
 
 

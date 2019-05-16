@@ -3,14 +3,12 @@ import {NgRedux} from '@angular-redux/store';
 import {IAppState} from '../store';
 import {IProduct} from '../item';
 import {ProductsApiService} from '../services/products-api.service';
+import {Router} from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class ProductsActions {
-  constructor(private ngRedux: NgRedux<IAppState>, private api: ProductsApiService) {}
-
-  static ADD_PRODUCT = 'ADD_PRODUCT';
-  static DELETE_PRODUCT = 'DELETE_PRODUCT';
-  static UPDATE_PRODUCT = 'UPDATE_PRODUCT';
+  constructor(private ngRedux: NgRedux<IAppState>, private api: ProductsApiService, private router: Router) {
+  }
 
   static GET_PRODUCTS_SUCCESS = 'GET_PRODUCTS_SUCCESS';
   static GET_PRODUCTS_FAILURE = 'GET_PRODUCTS_FAILURE';
@@ -24,23 +22,25 @@ export class ProductsActions {
   static DELETE_PRODUCT_SUCCESS = 'DELETE_PRODUCT_SUCCESS';
   static DELETE_PRODUCT_FAILURE = 'DELETE_PRODUCT_FAILURE';
 
+  static UPDATE_PRODUCT_LOADING = 'UPDATE_PRODUCT_LOADING';
+  static UPDATE_PRODUCT_SUCCESS = 'UPDATE_PRODUCT_SUCCESS';
+  static UPDATE_PRODUCT_FAILURE = 'UPDATE_PRODUCT_FAILURE';
 
-  /*  actionCreateProduct(product: IProduct): void {
-      this.ngRedux.dispatch(
-        {
-          type: ProductsActions.ADD_PRODUCT,
-          payload: product
-        });
-    }*/
 
+/*  actionCreateProduct(product: IProduct): void {
+    this.ngRedux.dispatch(
+      {type: ProductsActions.ADD_PRODUCT,
+        payload: product}); }
+
+  actionDeleteProduct(id: string): void {
+    this.ngRedux.dispatch({
+      type: ProductsActions.DELETE_PRODUCT,
+      payload: id}); }
 
   actionUpdateProduct(product: IProduct): void {
-    this.ngRedux.dispatch(
-      {
-        type: ProductsActions.UPDATE_PRODUCT,
-        payload: product
-      });
-  }
+    this.ngRedux.dispatch({
+      type: ProductsActions.UPDATE_PRODUCT,
+      payload: product}); }*/
 
 
   getProducts() {
@@ -63,59 +63,66 @@ export class ProductsActions {
 
   createNewProduct(product: IProduct): void {
     this.ngRedux.dispatch({
-      type: ProductsActions.CREATE_PRODUCT_LOADING,
-    });
+      type: ProductsActions.CREATE_PRODUCT_LOADING});
 
     // Call api
     this.api.createProduct(product).subscribe(DataFromWebService => {
-        console.log(DataFromWebService);
+      console.log(DataFromWebService);
 
-        // Dispatch action on success
-        this.ngRedux.dispatch({
-          type: ProductsActions.CREATE_PRODUCT_SUCCESS,
-          payload: DataFromWebService
-        });
+      // Dispatch action on success
+      this.ngRedux.dispatch({
+        type: ProductsActions.CREATE_PRODUCT_SUCCESS,
+        payload: DataFromWebService});
+      this.router.navigate(['/product/auction-overview']);
 
-        // Dispatch action on failure
-      }, error => {
-        this.ngRedux.dispatch({
-          type: ProductsActions.CREATE_PRODUCT_FAILURE,
-          payload: error
-        });
-      }
-    );
+
+      // Dispatch action on failure
+    }, error => {
+      this.ngRedux.dispatch({
+        type: ProductsActions.CREATE_PRODUCT_FAILURE,
+        payload: error});
+    });
   }
-
-
-  /*  actionDeleteProduct(id: string): void {
-      this.ngRedux.dispatch(
-        {
-          type: ProductsActions.DELETE_PRODUCT,
-          payload: id
-        });
-    }*/
 
 
   deleteProduct(id: string): void {
     this.ngRedux.dispatch({
-      type: ProductsActions.DELETE_PRODUCT_LOADING,
-    });
+      type: ProductsActions.DELETE_PRODUCT_LOADING});
 
-    // Call api
     this.api.deleteProduct(id).subscribe(DataFromWebService => {
-        console.log(id, DataFromWebService);
-        this.ngRedux.dispatch({
-          type: ProductsActions.DELETE_PRODUCT_SUCCESS,
-          payload: id
-        });
+      console.log(id, DataFromWebService);
+      this.ngRedux.dispatch({
+        type: ProductsActions.DELETE_PRODUCT_SUCCESS,
+        payload: id});
 
-      }, error => {
-        this.ngRedux.dispatch({
-          type: ProductsActions.DELETE_PRODUCT_FAILURE,
-          payload: error
-        });
+    }, error => {
+      this.ngRedux.dispatch({
+        type: ProductsActions.DELETE_PRODUCT_FAILURE,
+        payload: error
       });
+    });
   }
+
+
+  updateProduct(product: IProduct): void {
+    this.ngRedux.dispatch({
+      type: ProductsActions.UPDATE_PRODUCT_LOADING});
+
+    this.api.createProduct(product).subscribe(DataFromWebService => {
+      console.log(DataFromWebService);
+
+      this.ngRedux.dispatch({
+        type: ProductsActions.UPDATE_PRODUCT_SUCCESS,
+        payload: DataFromWebService});
+
+    }, error => {
+      this.ngRedux.dispatch({
+        type: ProductsActions.UPDATE_PRODUCT_FAILURE,
+        payload: error});
+    });
+  }
+
+
 }
 
 

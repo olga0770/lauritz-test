@@ -8,6 +8,7 @@ import {IAppState} from '../../store';
 import {ProductsActions} from '../../redux/products.actions';
 import {Observable} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
+import {BidsActions} from '../../redux/bids.actions';
 
 @Component({
   selector: 'app-product-details',
@@ -15,40 +16,26 @@ import {switchMap} from 'rxjs/operators';
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-  // @select() products;
   products: IProduct[];
   product: IProduct;
   isLoading: boolean;
+  bids: IBid[];
+  bid: IBid;
+  addBidForm: FormGroup;
 
-  // product$: Observable<IProduct>;
-  // products: IProduct[];
-
- /* tempBid: IBid;
-  addBidForm: FormGroup;*/
-
-
-
-
-    constructor(private route: ActivatedRoute, private temp: TempDataService,
-                private fb: FormBuilder, private ngRedux: NgRedux<IAppState>, private productsActions: ProductsActions) {
+  constructor(private route: ActivatedRoute, private temp: TempDataService,
+              private fb: FormBuilder, private ngRedux: NgRedux<IAppState>,
+              private productsActions: ProductsActions, private bidsActions: BidsActions) {
   }
 
   ngOnInit() {
-/*    const id = this.route.snapshot.paramMap.get('id');
-    this.t = this.temp.findProduct(id);*/
+    this.addBidForm = this.fb.group({
+      // amount: ['', [Validators.required, Validators.min(this.bid.amount + 500)]],
+      amount: ['', [Validators.required]],
+      userId: ['4'],
+      date: new Date()
 
-/*    this.addBidForm = this.fb.group({
-      amount: ['', [Validators.required, Validators.min(this.t.bids[this.t.bids.length - 1].amount + 500)]]
-    });*/
-
-
-/*    this.ngRedux.select(state => state.products).subscribe(res => {
-      this.products = res.products;
-      console.log('product by id');
-      const id = this.route.snapshot.paramMap.get('id');
-      this.product = this.products.find(p => p._id === id);
-   });*/
-
+    });
 
     this.productsActions.getProducts();
     this.ngRedux.select(state => state.products).subscribe(res => {
@@ -59,25 +46,23 @@ export class ProductDetailsComponent implements OnInit {
       this.product = this.products.find(p => p._id === id);
     });
 
-
-    // this.product.bids[0].amount = this.product.startingPrice;
+    this.ngRedux.select(state => state.bids).subscribe(res => {
+      this.bids = res.bids;
+    });
 
   }
 
 
-/*  this.productsActions.getProducts();
-  this.ngRedux.select(state => state.products).subscribe(res => {
-  this.products = res.products;
-  this.isLoading = res.isLoading;
-});*/
 
 
 
 
 
   onSubmit() {
-/*    const id = this.route.snapshot.paramMap.get('id');
+    // const id = this.route.snapshot.paramMap.get('id');
     const bid = this.addBidForm.value as IBid;
-    this.temp.addBid(bid, id);*/
+    this.bidsActions.addBid(bid);
+
+    // this.temp.addBid(bid, id);
   }
 }

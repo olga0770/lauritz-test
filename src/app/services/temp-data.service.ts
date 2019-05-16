@@ -100,6 +100,11 @@ export class TempDataService {
   ];
 
 
+  static bids: IBid[] = [
+    {_id: '1', userId: '4', amount: 34500, date: new Date(2019, 5, 10)}
+  ];
+
+
   /*products: IProduct[] = [
     {
       _id: '1',

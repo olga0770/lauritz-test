@@ -21,13 +21,13 @@ const routes: Routes = [
           {path: 'auction-create', component: AddProductComponent},
           {path: 'auction-overview', component: ProductOverviewComponent},
           {path: 'edit-auction/:id', component: EditProductComponent},
-          {path: 'product-details/:id', component: ProductDetailsComponent}
+          {path: 'product-details/:id', component: ProductDetailsComponent},
+          {path: 'rate-seller', component: UserRatingComponent},
         ]
       }
     ]},
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'rate-seller', component: UserRatingComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 

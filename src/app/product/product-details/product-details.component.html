@@ -10,7 +10,6 @@
                matTooltipPosition="above">
             <img mat-card-avatar [src]="product.user.profileImage" alt="profile image">
           </div>
-
           <mat-card-title>{{product.name}}</mat-card-title>
           <mat-card-subtitle>{{product.location}}</mat-card-subtitle>
         </mat-card-header>
@@ -27,7 +26,7 @@
             <div class="col-9">
               <p>{{product.description}}</p>
               <p><small>Starting Price:</small></p>
-              <h4 style="margin-top: -15px;">{{product.startingPrice}} DKK</h4>
+              <h4 style="margin-top: -15px;">{{product.startingPrice | currency:'DKK'}}</h4>
 
 <!--              <div *ngIf="(product.bids).length!=0 && product.bids[t.bids.length - 1].amount !=0" class="lastBid">
                 <p><small>Last Bid:</small></p>
@@ -40,23 +39,39 @@
                 <h4 style="margin-top: -15px;">{{product.bids[product.bids.length - 1].amount}} DKK</h4>
               </div>-->
 
+
+<!--              <div *ngIf="(products | async).length!=2">
+                <div *ngFor="let t of products | async last as isLast">
+                  <mat-card class="example-card" *ngIf="isLast">-->
+
+              <div class="lastBid" *ngFor="let bid of bids; let first = first; let last = last" [ngClass]="{ first: first, last: last }">
+                <div *ngIf="last">
+                  <p><small>Last Bid:</small></p>
+                  <h4 style="margin-top: -15px;">{{bid.amount | currency:'DKK'}}</h4>
+                </div>
+              </div>
+
               <p><b>Start:</b> {{product.dateCreated | date}}</p>
               <p style="margin-top: -15px;"><b>End:</b> {{product.endDate | date}}</p>
 
 
 
-              <!--<form class="example-form" (ngSubmit)="onSubmit()" [formGroup]="addBidForm">
+              <form class="example-form" (ngSubmit)="onSubmit()" [formGroup]="addBidForm">
                 <mat-form-field class="example-full-width">
                   <input matInput type="number"
                          placeholder="Add your bid"
                          formControlName="amount" required>
-                  <mat-error *ngIf="addBidForm.controls.amount.errors?.required && addBidForm.controls.amount.touched && addBidForm.controls.amount.dirty">
+                  <mat-error *ngIf="addBidForm.controls.amount.errors?.required && addBidForm.controls.amount.touched &&
+                                    addBidForm.controls.amount.dirty">
                     The Bid field is required!</mat-error>
                   <mat-error *ngIf="addBidForm.controls.amount.errors?.min">
                   Your Bid must be greater than tne Last Bid!</mat-error>
                 </mat-form-field>
+
                 <button type="submit" mat-raised-button color="primary" [disabled]="!addBidForm.valid">Add Bid</button>
-              </form>-->
+              </form>
+
+
 
 
 
@@ -69,6 +84,7 @@
     </div>
   </div>
 </div>
+
 
 
 

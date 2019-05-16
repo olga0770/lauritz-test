@@ -31,13 +31,13 @@ export class ProductsApiService {
     return this.http.post(this.baseUrl, product);
   }
 
-
-  deleteProduct(id: string): Observable<{}> {
+  deleteProduct(id: string): Observable<any> {
     const url = `${this.baseUrl}/${id}`;
     return this.http.delete(url);
+  }
 
-
-
+  updateProduct(product: IProduct): Observable<any> {
+    return this.http.patch(this.baseUrl, product);
   }
 
 

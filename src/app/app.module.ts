@@ -23,7 +23,9 @@ import { RegisterComponent } from './user/register/register.component';
 import { LoginComponent } from './user/login/login.component';
 import { UserRatingComponent } from './user/user-rating/user-rating.component';
 import { ProductInfoComponent } from './product/product-info/product-info.component';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { ProductSearchPipe } from './services/product-search.pipe';
+import { RatingComponent } from './user/rating/rating.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import {HttpClientModule} from '@angular/common/http';
     RegisterComponent,
     LoginComponent,
     UserRatingComponent,
-    ProductInfoComponent
+    ProductInfoComponent,
+    ProductSearchPipe,
+    RatingComponent
 
   ],
   imports: [

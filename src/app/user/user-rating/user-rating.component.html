@@ -11,23 +11,24 @@
 
 <div class="container">
   <div class="row" *ngIf="(users)?.length!=0">
-    <div class="col-sm-12 col-md-6" *ngFor="let t of users">
-      <div *ngIf="t.isAdmin===false">
+    <div class="col-sm-12 col-md-6" *ngFor="let user of users">
+      <div *ngIf="user.isAdmin===false">
 
-      <mat-card class="example-card">
+        <mat-card class="example-card">
 
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image">
-            <img mat-card-avatar [src]="t.profileImage" alt="profile image">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image">
+              <img mat-card-avatar [src]="user.profileImage" alt="profile image">
+            </div>
+            <mat-card-title>{{user.firstname }} {{user.lastname}}</mat-card-title>
+            <br><br>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <app-rating></app-rating>
+          <div class="text-right">
+            <button mat-button color="accent" routerLink=" " style="margin-top: 30px; align-self: end;">More Info...</button>
           </div>
-          <mat-card-title>{{t.firstname }} {{t.lastname}}</mat-card-title><br><br>
-        </mat-card-header>
-        <mat-divider></mat-divider>
-        <p style="margin-top: 10px;"><b>Rating:</b></p>
-        <mat-divider></mat-divider>
-        <button mat-button color="accent" routerLink=" " style="margin-left: -15px;">More Info...</button>
-
-      </mat-card>
+        </mat-card>
 
       </div>
     </div>

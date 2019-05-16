@@ -19,6 +19,7 @@ export class UserRatingComponent implements OnInit {
     this.ngRedux.select(state => state.users).subscribe(res => {
       this.users = res.users;
     });
+
   }
 
 }

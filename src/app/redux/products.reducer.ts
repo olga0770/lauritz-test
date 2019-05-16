@@ -35,13 +35,12 @@ export function productsReducer(state: ProductState = INITIAL_STATE, action: any
        );
 */
 
-
-    case ProductsActions.UPDATE_PRODUCT:
+/*    case ProductsActions.UPDATE_PRODUCT:
       const stateBeforeUpdate = [...state.products];
       const index = stateBeforeUpdate.findIndex(prod => prod._id === action.payload._id);
       const stateAfterUpdate = [...state.products.slice(0, index), ...action.payload, ...state.products.slice(index + 1)];
       return tassign(state, {products: stateAfterUpdate}
-      );
+      );*/
 
 
 
@@ -57,8 +56,6 @@ export function productsReducer(state: ProductState = INITIAL_STATE, action: any
     case ProductsActions.GET_PRODUCTS_FAILURE:
       console.log(action.payload);
       return tassign(state, {isLoading: false});
-
-
 
 
     case ProductsActions.CREATE_PRODUCT_FAILURE:
@@ -78,8 +75,8 @@ export function productsReducer(state: ProductState = INITIAL_STATE, action: any
       return newState;
 
 
+
     case ProductsActions.DELETE_PRODUCT_FAILURE:
-      // display an error message
       console.log(action.payload);
       return state;
 
@@ -88,8 +85,23 @@ export function productsReducer(state: ProductState = INITIAL_STATE, action: any
 
     case ProductsActions.DELETE_PRODUCT_SUCCESS:
       return tassign(state, {
-        products: state.products.filter(prod => prod._id !== action.payload)
-      });
+        products: state.products.filter(prod => prod._id !== action.payload), isLoading: false});
+
+
+
+    case ProductsActions.UPDATE_PRODUCT_FAILURE:
+      console.log(action.payload);
+      return state;
+
+    case ProductsActions.UPDATE_PRODUCT_LOADING:
+      return tassign(state, {isLoading: true});
+
+    case ProductsActions.UPDATE_PRODUCT_SUCCESS:
+      console.log(state);
+      const stateBeforeUpdate = [...state.products];
+      const index = stateBeforeUpdate.findIndex(prod => prod._id === action.payload._id);
+      const stateAfterUpdate = [...state.products.slice(0, index), ...action.payload, ...state.products.slice(index + 1)];
+      return tassign(state, {products: stateAfterUpdate});
 
 
     default:

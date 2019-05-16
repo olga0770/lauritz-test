@@ -7,7 +7,7 @@ import { IProduct, IUser, IBid } from '../item';
 
 fdescribe('products reducer', () => {
 
-  it('should add a new product', () => {
+  it('should create a new product', () => {
     const stateBefore = {products: []} as ProductState;
     deepFreeze(stateBefore);
 
@@ -29,8 +29,9 @@ fdescribe('products reducer', () => {
         {_id: '1', userId: '1', amount: 32500, date: new Date (2019, 7, 10)}
       ]
     };
-    const stateAfter = {products: [product]};
-    const response = productsReducer(stateBefore, {type: types.ProductsActions.ADD_PRODUCT, payload: product});
+    const stateAfter = {products: [product], isLoading: false};
+    const response = productsReducer(stateBefore, {
+      type: types.ProductsActions.CREATE_PRODUCT_SUCCESS, payload: product});
     expect(stateAfter).toEqual(response);
   });
 
@@ -54,7 +55,7 @@ fdescribe('products reducer', () => {
         {_id: '1', name: 'Hair Brush'},
         {_id: '2', name: 'Nail polish'},
         {_id: '3', name: 'Nail psykologist'}]} as ProductState;
-    const response = productsReducer(beforeState, {type: types.ProductsActions.UPDATE_PRODUCT,
+    const response = productsReducer(beforeState, {type: types.ProductsActions.UPDATE_PRODUCT_SUCCESS,
       payload: {_id: '2', name: 'Nail polish'}});
     expect(afterState).toEqual(response);
   });
@@ -74,8 +75,8 @@ fdescribe('products reducer', () => {
     deepFreeze(beforeState);
     const afterState = {products: [
         {_id: '1', name: 'Hair Brush'},
-        {_id: '3', name: 'Nail psykologist'}]};
-    const response = productsReducer(beforeState, {type: types.ProductsActions.DELETE_PRODUCT, payload: '2'});
+        {_id: '3', name: 'Nail psykologist'}], isLoading: false};
+    const response = productsReducer(beforeState, {type: types.ProductsActions.DELETE_PRODUCT_SUCCESS, payload: '2'});
     expect(afterState).toEqual(response);
   });
 

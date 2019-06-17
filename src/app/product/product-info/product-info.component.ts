@@ -9,18 +9,14 @@ import {ProductsActions} from '../../redux/products.actions';
 })
 export class ProductInfoComponent implements OnInit {
   @Input() product: IProduct;
-  @Output() productOverview: EventEmitter<any> = new EventEmitter<any>();
+  // @Output() productOverview: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private productsActions: ProductsActions) { }
 
-  ngOnInit() {
-  }
-
-  onProductClicked() {
-    this.productOverview.emit(this.product);
-  }
+  ngOnInit() {}
 
   deleteProduct(product) {
-    this.productsActions.deleteProduct(product); }
-
+    if (!confirm('Are you sure you want to delete your product?')) {return; }
+    this.productsActions.deleteProduct(product);
+  }
 }

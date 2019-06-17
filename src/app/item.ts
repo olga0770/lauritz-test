@@ -28,8 +28,10 @@ export interface IUser {
 export interface IBid {
   _id: string;
   userId: string;
+  productId?: string;
   amount: number;
   date: Date;
+
 }
 
 

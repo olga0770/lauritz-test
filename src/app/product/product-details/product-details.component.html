@@ -3,7 +3,6 @@
     <div class="col-12">
 
       <mat-card class="example-card">
-
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"
                matTooltip="{{product.user.firstname}} {{product.user.lastname}}"
@@ -14,7 +13,6 @@
           <mat-card-subtitle>{{product.location}}</mat-card-subtitle>
         </mat-card-header>
         <mat-divider></mat-divider><br>
-
 
         <div class="container">
           <div class="row">
@@ -28,21 +26,10 @@
               <p><small>Starting Price:</small></p>
               <h4 style="margin-top: -15px;">{{product.startingPrice | currency:'DKK'}}</h4>
 
-<!--              <div *ngIf="(product.bids).length!=0 && product.bids[t.bids.length - 1].amount !=0" class="lastBid">
+<!--              <div>
                 <p><small>Last Bid:</small></p>
-                <h4 style="margin-top: -15px;">{{product.bids[product.bids.length - 1].amount}} DKK</h4>
+                <h4 style="margin-top: -15px;">{{product.bids[product.bids.length - 1].amount | currency:'DKK'}}</h4>
               </div>-->
-
-<!--              <div class="lastBid">
-                <p><small>Last Bid:</small></p>
-                <h4 style="margin-top: -15px;">{{product.bids[0].amount === product.startingPrice}} DKK</h4>
-                <h4 style="margin-top: -15px;">{{product.bids[product.bids.length - 1].amount}} DKK</h4>
-              </div>-->
-
-
-<!--              <div *ngIf="(products | async).length!=2">
-                <div *ngFor="let t of products | async last as isLast">
-                  <mat-card class="example-card" *ngIf="isLast">-->
 
               <div class="lastBid" *ngFor="let bid of bids; let first = first; let last = last" [ngClass]="{ first: first, last: last }">
                 <div *ngIf="last">
@@ -53,8 +40,6 @@
 
               <p><b>Start:</b> {{product.dateCreated | date}}</p>
               <p style="margin-top: -15px;"><b>End:</b> {{product.endDate | date}}</p>
-
-
 
               <form class="example-form" (ngSubmit)="onSubmit()" [formGroup]="addBidForm">
                 <mat-form-field class="example-full-width">
@@ -71,16 +56,10 @@
                 <button type="submit" mat-raised-button color="primary" [disabled]="!addBidForm.valid">Add Bid</button>
               </form>
 
-
-
-
-
             </div>
           </div>
         </div>
-
       </mat-card>
-
     </div>
   </div>
 </div>

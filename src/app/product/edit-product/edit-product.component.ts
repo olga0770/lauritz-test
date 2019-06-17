@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { NgRedux, select } from '@angular-redux/store';
+import {Component, OnInit} from '@angular/core';
+import {NgRedux, select} from '@angular-redux/store';
 import {IAppState, ProductState} from '../../store';
-import { IProduct } from '../../item';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {IProduct} from '../../item';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {ProductsActions} from '../../redux/products.actions';
 import {TempDataService} from '../../services/temp-data.service';
@@ -20,19 +20,18 @@ export class EditProductComponent implements OnInit {
   editProductForm: FormGroup;
 
   constructor(private ngRedux: NgRedux<IAppState>, private fb: FormBuilder, private productsActions: ProductsActions,
-              private route: ActivatedRoute, private temp: TempDataService) { }
+              private route: ActivatedRoute, private temp: TempDataService) {
+  }
 
   ngOnInit() {
+    const reg = '^(?:http(s)?:\\/\\/)?[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&\'\\(\\)\\*\\+,;=.]+$';
+
     this.editProductForm = this.fb.group(
       {
-        // _id: [''],
-        name: ['Leather Swan Chair - Inspired By Designs of Arne Jacobsen', [Validators.required, Validators.minLength(3)]],
-        image: 'https://static.illumsbolighus.dk/Admin/Public/GetImage.ashx?Image=/Files/Images/' +
-          'XPI/8f98f20a-64c4-cfaf-388d-582ae2532d47.jpg&Width=1200&Crompression=90',
-        description: ['Jacobsen’s beautifully sculpted Swan Chair could just be the most recognisable chair of our times. ' +
-        'So if you’re thinking of buying one, you need to know you’re getting ' +
-        'a lot more than a style icon…', [Validators.required, Validators.minLength(10)]],
-        location: ['Copenhagen', [Validators.required, Validators.minLength(3)]],
+        name: ['', [Validators.required, Validators.minLength(3)]],
+        image: ['', [Validators.required, Validators.pattern(reg)]],
+        description: ['', [Validators.required, Validators.minLength(10)]],
+        location: ['', [Validators.required, Validators.minLength(3)]],
         endDate: new Date(),
         dateCreated: new Date(),
         user: {
@@ -45,20 +44,10 @@ export class EditProductComponent implements OnInit {
           birthDate: new Date(1971, 1, 2),
           isAdmin: false
         },
-        startingPrice: ['34500', [Validators.required]],
-        bids: [
-          {_id: '1', userId: '3', amount: '34500', date: new Date ()}
-        ]
+        startingPrice: ['', [Validators.required]],
+        bids: []
       }
-      );
-
-/*    this.ngRedux.select(state => state.products).subscribe(res => {
-      this.products = res.products;
-    });*/
-
-    // const id = this.route.snapshot.paramMap.get('id');
-    // this.productsActions.actionGetProduct(id);
-    // this.t = this.temp.findProduct(id);
+    );
 
     this.ngRedux.select(state => state.products).subscribe(res => {
       this.products = res.products;
@@ -69,27 +58,16 @@ export class EditProductComponent implements OnInit {
   }
 
   onSubmit() {
-    this.product = this.editProductForm.value as IProduct;
-    this.productsActions.updateProduct(this.product);
+    const product = this.editProductForm.value as IProduct;
+    const id = this.route.snapshot.paramMap.get('id');
+    this.productsActions.updateProduct(id, product);
     console.log('update');
-
-
-
-
-    /*
-        this.ngRedux.select(state => state.products).subscribe(res => {
-          this.products = res.products;
-        });
-    */
-
-
-
-
-
-
-
   }
-
-
-
 }
+
+
+
+/*
+image: 'https://static.illumsbolighus.dk/Admin/Public/GetImage.ashx?' +
+'Image=/Files/Images/XPI/a994fb59-e616-bc9e-a443-29c09bb402b3.jpg&Width=1200&Crompression=90',
+*/

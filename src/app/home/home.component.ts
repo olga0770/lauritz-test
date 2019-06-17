@@ -13,27 +13,17 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  // @select() products;
-
   products: IProduct[];
-
-  // @select() items;
 
   constructor(private route: ActivatedRoute, private temp: TempDataService, private ngRedux: NgRedux<IAppState>,
               private productsActions: ProductsActions) {
   }
 
   ngOnInit() {
-    // this.products = this.temp.getProducts();
     this.ngRedux.select(state => state.products).subscribe(res => {
       this.products = res.products;
     });
   }
-
-/*  getProduct() {
-    // this.productsActions.actionGetProduct(product);
-  }*/
-
 
 }
 

@@ -8,12 +8,11 @@ export class BidsActions {
   constructor(private ngRedux: NgRedux<IAppState>) {
   }
 
-  static ADD_BID = 'ADD_USER';
+  static ADD_BID = 'ADD_BID';
 
   addBid(bid: IBid): void {
     this.ngRedux.dispatch(
       {type: BidsActions.ADD_BID,
         payload: bid});
   }
-
 }

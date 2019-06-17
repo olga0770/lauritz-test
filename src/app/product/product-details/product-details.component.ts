@@ -22,6 +22,7 @@ export class ProductDetailsComponent implements OnInit {
   bids: IBid[];
   bid: IBid;
   addBidForm: FormGroup;
+  amount: number;
 
   constructor(private route: ActivatedRoute, private temp: TempDataService,
               private fb: FormBuilder, private ngRedux: NgRedux<IAppState>,
@@ -29,14 +30,6 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.addBidForm = this.fb.group({
-      // amount: ['', [Validators.required, Validators.min(this.bid.amount + 500)]],
-      amount: ['', [Validators.required]],
-      userId: ['4'],
-      date: new Date()
-
-    });
-
     this.productsActions.getProducts();
     this.ngRedux.select(state => state.products).subscribe(res => {
       this.products = res.products;
@@ -47,22 +40,19 @@ export class ProductDetailsComponent implements OnInit {
     });
 
     this.ngRedux.select(state => state.bids).subscribe(res => {
-      this.bids = res.bids;
+        this.bids = res.bids;
+      });
+
+    this.addBidForm = this.fb.group({
+      amount: ['', [Validators.required, Validators.min(50000)]],
+      userId: ['4'],
+      date: new Date()
     });
 
   }
 
-
-
-
-
-
-
   onSubmit() {
-    // const id = this.route.snapshot.paramMap.get('id');
     const bid = this.addBidForm.value as IBid;
     this.bidsActions.addBid(bid);
-
-    // this.temp.addBid(bid, id);
   }
 }

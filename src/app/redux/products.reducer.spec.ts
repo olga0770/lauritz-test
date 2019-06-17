@@ -47,16 +47,16 @@ fdescribe('products reducer', () => {
 
   it('should update a product object', () => {
     const beforeState = {products: [
-        {_id: '1', name: 'Hair Brush'},
-        {_id: '2', name: 'Nail conditioner'},
-        {_id: '3', name: 'Nail psykologist'}]} as ProductState;
+        {_id: '1', name: 'Egg Lounge Chair indian red'},
+        {_id: '2', name: 'Herman Lounge Chair black'},
+        {_id: '3', name: 'EJ 110 Asko Chair'}]} as ProductState;
     deepFreeze(beforeState);
     const afterState = {products: [
-        {_id: '1', name: 'Hair Brush'},
-        {_id: '2', name: 'Nail polish'},
-        {_id: '3', name: 'Nail psykologist'}]} as ProductState;
+        {_id: '1', name: 'Egg Lounge Chair indian red'},
+        {_id: '2', name: 'EJ5 Corona Armchair cognac'},
+        {_id: '3', name: 'EJ 110 Asko Chair'}]} as ProductState;
     const response = productsReducer(beforeState, {type: types.ProductsActions.UPDATE_PRODUCT_SUCCESS,
-      payload: {_id: '2', name: 'Nail polish'}});
+      payload: {_id: '2', name: 'EJ5 Corona Armchair cognac'}});
     expect(afterState).toEqual(response);
   });
 

@@ -15,6 +15,7 @@ import {MatSnackBar} from '@angular/material';
 export class ProductOverviewComponent implements OnInit {
   products: IProduct[];
   isLoading: boolean;
+  productSearch: string;
 
   constructor(private ngRedux: NgRedux<IAppState>, private temp: TempDataService, private productsActions: ProductsActions,
               private snackBar: MatSnackBar) {

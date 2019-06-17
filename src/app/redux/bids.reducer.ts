@@ -3,7 +3,7 @@ import {BidsActions} from './bids.actions';
 import {tassign} from 'tassign';
 import {BidState} from '../store';
 
-export const INITIAL_STATE: BidState = {bids: TempDataService.bids};
+export const INITIAL_STATE: BidState = {bids: (TempDataService.bids)};
 
 export function bidsReducer(state: BidState = INITIAL_STATE, action: any) {
   switch (action.type) {

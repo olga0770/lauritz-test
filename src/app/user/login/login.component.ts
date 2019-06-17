@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   }
 
   setMessage() {
-    this.message = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
+    this.message = 'You are logged ' + (this.authService.isLoggedIn ? 'in.' : 'out.');
   }
 
   logout() {
@@ -37,15 +37,9 @@ export class LoginComponent implements OnInit {
         username: ['', [Validators.required, Validators.minLength(3)]],
         password: ['', [Validators.required]],
       });
-
-/*    this.ngRedux.select(state => state.users).subscribe(res => {
-      this.users = res.users;
-    });*/
-
   }
 
   onSubmit() {
-
     this.message = 'Trying to log in ...';
 
     this.authService.login().subscribe(() => {

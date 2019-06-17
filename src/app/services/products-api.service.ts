@@ -18,31 +18,19 @@ export class ProductsApiService {
 
   createProduct(product: IProduct): Observable<any> {
     product.customerId = 'lauritzzzz';
-    product.user = {
-      _id: '3', username: 'monkey',
-      profileImage: 'https://archive.icann.org/en/biog/photos/chalaby-profile.jpg',
-      firstname: 'Dan', lastname: 'Christensen',
-      email: 'christensen@gmail.com',
-      password: '123456',
-      phone: '23125678',
-      birthDate: new Date(1971, 1, 2),
-      isAdmin: false
-    };
     return this.http.post(this.baseUrl, product);
   }
 
   deleteProduct(id: string): Observable<any> {
     const url = `${this.baseUrl}/${id}`;
-    return this.http.delete(url);
+    return this.http.delete(url, {responseType: 'text'});
   }
 
-  updateProduct(product: IProduct): Observable<any> {
-    return this.http.patch(this.baseUrl, product);
+  updateProduct(id: string, product: IProduct): Observable<any> {
+    product.customerId = 'lauritzzzz';
+    const url = `${this.baseUrl}/${id}`;
+    return this.http.put(url, product, {responseType: 'text'});
   }
-
-
-
-
 
 
 }

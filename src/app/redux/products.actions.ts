@@ -27,20 +27,20 @@ export class ProductsActions {
   static UPDATE_PRODUCT_FAILURE = 'UPDATE_PRODUCT_FAILURE';
 
 
-/*  actionCreateProduct(product: IProduct): void {
-    this.ngRedux.dispatch(
-      {type: ProductsActions.ADD_PRODUCT,
-        payload: product}); }
+  /*  actionCreateProduct(product: IProduct): void {
+      this.ngRedux.dispatch(
+        {type: ProductsActions.ADD_PRODUCT,
+          payload: product}); }
 
-  actionDeleteProduct(id: string): void {
-    this.ngRedux.dispatch({
-      type: ProductsActions.DELETE_PRODUCT,
-      payload: id}); }
+    actionDeleteProduct(id: string): void {
+      this.ngRedux.dispatch({
+        type: ProductsActions.DELETE_PRODUCT,
+        payload: id}); }
 
-  actionUpdateProduct(product: IProduct): void {
-    this.ngRedux.dispatch({
-      type: ProductsActions.UPDATE_PRODUCT,
-      payload: product}); }*/
+    actionUpdateProduct(product: IProduct): void {
+      this.ngRedux.dispatch({
+        type: ProductsActions.UPDATE_PRODUCT,
+        payload: product}); }*/
 
 
   getProducts() {
@@ -63,7 +63,8 @@ export class ProductsActions {
 
   createNewProduct(product: IProduct): void {
     this.ngRedux.dispatch({
-      type: ProductsActions.CREATE_PRODUCT_LOADING});
+      type: ProductsActions.CREATE_PRODUCT_LOADING
+    });
 
     // Call api
     this.api.createProduct(product).subscribe(DataFromWebService => {
@@ -72,28 +73,31 @@ export class ProductsActions {
       // Dispatch action on success
       this.ngRedux.dispatch({
         type: ProductsActions.CREATE_PRODUCT_SUCCESS,
-        payload: DataFromWebService});
+        payload: DataFromWebService
+      });
       this.router.navigate(['/product/auction-overview']);
-
 
       // Dispatch action on failure
     }, error => {
       this.ngRedux.dispatch({
         type: ProductsActions.CREATE_PRODUCT_FAILURE,
-        payload: error});
+        payload: error
+      });
     });
   }
 
 
   deleteProduct(id: string): void {
     this.ngRedux.dispatch({
-      type: ProductsActions.DELETE_PRODUCT_LOADING});
+      type: ProductsActions.DELETE_PRODUCT_LOADING
+    });
 
     this.api.deleteProduct(id).subscribe(DataFromWebService => {
       console.log(id, DataFromWebService);
       this.ngRedux.dispatch({
         type: ProductsActions.DELETE_PRODUCT_SUCCESS,
-        payload: id});
+        payload: id
+      });
 
     }, error => {
       this.ngRedux.dispatch({
@@ -104,21 +108,25 @@ export class ProductsActions {
   }
 
 
-  updateProduct(product: IProduct): void {
+  updateProduct(id: string, product: IProduct): void {
     this.ngRedux.dispatch({
-      type: ProductsActions.UPDATE_PRODUCT_LOADING});
+      type: ProductsActions.UPDATE_PRODUCT_LOADING
+    });
 
-    this.api.createProduct(product).subscribe(DataFromWebService => {
-      console.log(DataFromWebService);
+    this.api.updateProduct(id, product).subscribe(DataFromWebService => {
+      console.log(id, DataFromWebService, 'update product action');
 
       this.ngRedux.dispatch({
         type: ProductsActions.UPDATE_PRODUCT_SUCCESS,
-        payload: DataFromWebService});
+        payload: id, DataFromWebService});
+      this.router.navigate(['/product/auction-overview']);
+
 
     }, error => {
       this.ngRedux.dispatch({
         type: ProductsActions.UPDATE_PRODUCT_FAILURE,
-        payload: error});
+        payload: error
+      });
     });
   }
 

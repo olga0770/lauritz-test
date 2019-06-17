@@ -18,8 +18,13 @@
   <div *ngIf="isLoading" style="margin-left: 15px;">Please wait... We are loading products.</div>
   <div class="row" *ngIf="(products)?.length!=0">
     <div class="col-sm-12 col-md-6" *ngFor="let p of products.slice().reverse() | productSearch: productSearch">
-      <app-product-info [product]="p" (productOverview)="onProductClick($event)"></app-product-info>
+      <app-product-info [product]="p"></app-product-info>
     </div>
   </div>
 </div>
+
+
+<!--
+<app-product-info [product]="p" (productOverview)="onProductClick($event)"></app-product-info>
+-->
 

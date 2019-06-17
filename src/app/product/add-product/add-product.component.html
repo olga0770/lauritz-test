@@ -1,9 +1,3 @@
-<!--<mat-card class="example-card">
-  <p>
-    <span matBadge="{{ (products).length }}" matBadgeOverlap="false" matBadgeColor="accent">Total items</span>
-  </p>
-</mat-card>-->
-
 <div class="container">
   <div class="row justify-content-center align-items-center h-100">
     <div class="col-sm-12 col-md-8 col-lg-6 mx-auto">
@@ -18,7 +12,7 @@
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Auction Title" formControlName="name" required>
             <mat-error
-              *ngIf="addProductForm.controls.name.errors?.required && addProductForm.controls.name.touched && addProductForm.controls.name.dirty">
+              *ngIf="addProductForm.controls.name.errors?.required && addProductForm.controls.name.touched && addProductForm.controls.name.dirt">
               The Auction field is required!
             </mat-error>
             <mat-error
@@ -37,6 +31,19 @@
             <mat-error
               *ngIf="addProductForm.controls.location.errors?.minlength">
               The Location field must be at least 3 characters!
+            </mat-error>
+          </mat-form-field>
+          <br>
+
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Image URL" formControlName="image" required type="url">
+            <mat-error
+              *ngIf="addProductForm.controls.image.errors?.required && addProductForm.controls.image.touched && addProductForm.controls.image.dirty">
+              The Image URL field is required!
+            </mat-error>
+            <mat-error
+              *ngIf="addProductForm.controls.image.errors?.pattern">
+              Invalid URL!
             </mat-error>
           </mat-form-field>
           <br>
@@ -82,79 +89,3 @@
     </div>
   </div>
 </div>
-
-
-<!--<div class="container">
-  <div *ngIf="isLoading" style="text-align: center;">Please wait... We are loading products.</div>
-  <div class="row" *ngIf="(products)?.length!=0">
-    <div class="col-sm-12 col-md-6" *ngFor="let t of products.slice().reverse()">
-      <mat-card class="example-card">
-
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"
-               matTooltip="{{t.user.firstname}} {{t.user.lastname}}"
-               matTooltipPosition="above">
-            <img mat-card-avatar *ngIf="t.user.profileImage" [src]="t.user.profileImage" alt="profile image">
-          </div>
-          <mat-card-title>{{t.name }}</mat-card-title>
-          <mat-card-subtitle>{{t.location}}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-divider></mat-divider>
-        <br>
-
-        <div class="container">
-          <div class="row">
-            <div class="col-6">
-              <img mat-card-image *ngIf="t.image" [src]="t.image"
-                   alt="image" style="margin-top: 5px;">
-            </div>
-
-            <div class="col-6">
-              <p><small>Starting Price:</small></p>
-              <h4 style="margin-top: -15px;">{{t.startingPrice}} DKK</h4>
-
-              <p><b>Start:</b> {{t.dateCreated | date}}</p>
-              <p style="margin-top: -15px;"><b>End:</b> {{t.endDate | date}}</p>
-
-              <button mat-button color="accent" routerLink="/product/product-details/{{t._id}}" style="margin-left: -15px;">More
-                Info...
-              </button>
-              <br>
-              <button mat-icon-button color="warn" style="margin-left: -15px;">
-                <mat-icon (click)="deleteProduct(t._id)"
-                          matTooltip="delete"
-                          matTooltipPosition="above">delete
-                </mat-icon>
-              </button>
-
-              <button mat-icon-button color="accent" style="margin-left: -15px;">
-                <mat-icon matTooltip="edit"
-                          matTooltipPosition="above"
-                          routerLink="/product/edit-auction/{{t._id}}">edit
-                </mat-icon>
-              </button>
-
-            </div>
-          </div>
-        </div>
-      </mat-card>
-    </div>
-  </div>
-</div>-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

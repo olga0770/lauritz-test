@@ -9,7 +9,6 @@ import {TempDataService} from './services/temp-data.service';
 export class ProductState {
   products: IProduct[];
   isLoading: boolean;
-  // lastUpdate: null;
 }
 
 export class UserState {
@@ -22,7 +21,6 @@ export class BidState {
 
 export class IAppState {
   products?: ProductState;
-  // lastUpdate?: Date;
   users?: UserState;
   bids?: BidState;
 

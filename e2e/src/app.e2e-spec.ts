@@ -34,10 +34,11 @@ describe('workspace-project App', () => {
 
       element(by.id('btnNewAuction')).click();
       browser.sleep(1000);
-      page.getByFormControlName('name').sendKeys('PH Snowball Louis Poulsen');
+      page.getByFormControlName('name').sendKeys('Pot 3318 Lounge Chair walnut. Designer: Arne Jacobsen');
       page.getByFormControlName('location').sendKeys('Copenhagen');
-      page.getByFormControlName('description').sendKeys('Poul Henningsen designed his first lamps back in 1925-1926.');
-      page.getByFormControlName('startingPrice').sendKeys(16500);
+      page.getByFormControlName('image').sendKeys('https://static.illumsbolighus.dk/Admin/Public/GetImage.ashx?Image=/Files/Images/XPI/af631e74-311c-429b-ec94-e9a1732641c2.jpg&Width=500&Height=500&Crop=5&Compression=90');
+      page.getByFormControlName('description').sendKeys('Pot Lounge Chair in Elegance leather and frame in chromed steel.');
+      page.getByFormControlName('startingPrice').sendKeys(22500);
       page.getByFormControlName('endDate').sendKeys('');
       browser.sleep(3000);
       element(by.id('btnCreateNewAuction')).click();

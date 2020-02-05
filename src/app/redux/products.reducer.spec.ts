@@ -9,7 +9,7 @@ fdescribe('products reducer', () => {
 
   it('should create a new product', () => {
     const stateBefore = {products: []} as ProductState;
-    deepFreeze(stateBefore);
+    deepFreeze(stateBefore); // freeze to protect the original state
 
     const product = {
       _id: '3',
@@ -29,10 +29,12 @@ fdescribe('products reducer', () => {
         {_id: '1', userId: '1', amount: 32500, date: new Date (2019, 7, 10)}
       ]
     };
-    const stateAfter = {products: [product], isLoading: false};
+    // the expected state:
+    const expectedStateAfter = {products: [product], isLoading: false};
+    // the actual operation that we want to test:
     const response = productsReducer(stateBefore, {
       type: types.ProductsActions.CREATE_PRODUCT_SUCCESS, payload: product});
-    expect(stateAfter).toEqual(response);
+    expect(expectedStateAfter).toEqual(response);
   });
 
 

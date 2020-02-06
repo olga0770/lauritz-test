@@ -8,7 +8,7 @@ import {catchError} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProductsApiService {
-  baseUrl = 'http://angular2api2.azurewebsites.net/api/internships';
+  baseUrl = 'https://angular2api2.azurewebsites.net/api/internships';
 
   constructor(private http: HttpClient) { }
 

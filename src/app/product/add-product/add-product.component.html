@@ -12,7 +12,7 @@
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Auction Title" formControlName="name" required>
             <mat-error
-              *ngIf="addProductForm.controls.name.errors?.required && addProductForm.controls.name.touched && addProductForm.controls.name.dirt">
+              *ngIf="addProductForm.controls.name.errors?.required && addProductForm.controls.name.touched && addProductForm.controls.name.dirty">
               The Auction field is required!
             </mat-error>
             <mat-error
